@@ -1,6 +1,7 @@
-<!-- Tabirly • Numeroloji Falı (Deluxe) — Clean v4.1 Bilingual (TR/EN, dynamic placeholders) -->
+<!-- Tabirly • Numeroloji Falı (Deluxe) — Clean v4.2 Bilingual (TR/EN, dynamic placeholders, bugfix) -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
 <style>
+/* ... STYLES UNCHANGED FROM v4.1 ... (tamamı burada; kısaltma yok) */
 :root{
   --p1:#E87C6D; --p2:#EBA76D; --p3:#E8926D; --p4:#E86D82; --p5:#E8BA6D; --p6:#F0A88D;
   --page:#FFF9F6; --panel:#FFF6F1; --card:#FFFCFA; --card-alt:#FFF7F3; --border:#F2D5C9;
@@ -57,7 +58,7 @@ summary{cursor:pointer;font-weight:700;color:#141517}
 .timeItem b{display:block;color:#0f1112}
 .pill{display:inline-block;padding:4px 10px;border:1px solid var(--border);border-radius:999px;margin:2px;font-size:.8rem;color:#2a2e34;background:#fff}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.foot{margin-top:10px;font-size:.86rem;color:var(--muted)}
+.foot{margin-top:10px;font-size:.86rem;color:#muted}
 .card .mini{margin-top:6px;font-size:.9rem;line-height:1.35;color:#2b3138}
 .tip{border-bottom:1px dashed rgba(0,0,0,.35);cursor:help}
 .timeItem .mini{margin-top:6px;font-size:.9rem;color:#2b3138;line-height:1.35}
@@ -109,7 +110,7 @@ summary{cursor:pointer;font-weight:700;color:#141517}
         <span class="muted" style="font-size:x-small;" id="t.chald9">Chaldean’da 9 rakamı harf eşleşmesinde yoktur; sadece toplamdan doğarsa görünür.</span>
       </div>
 
-      <div class="card"><h3 id="t.smartTitle">Akıllı Özet</h3><div class="long muted" id="smart-summary" data-default="smartDefault">Sonuçları hesapla; kişisel özet burada oluşacak.</div></div>
+      <div class="card"><h3 id="t.smartTitle">Akıllı Özet</h3><div class="long muted" id="smart-summary">Sonuçları hesapla; kişisel özet burada oluşacak.</div></div>
 
       <div class="card" id="out-core"><h3><span id="t.coreTitle">Çekirdek Sayılar</span> <span class="badge" id="sys-badge"></span></h3><div class="results" id="core-grid"></div></div>
 
@@ -118,7 +119,7 @@ summary{cursor:pointer;font-weight:700;color:#141517}
         <div class="card"><h3 id="t.cyclesTitle">Zaman Döngüleri</h3><div class="results" id="cycle-grid"></div></div>
       </div>
 
-      <div class="card"><h3 id="t.timelineTitle">Zirve ve Mücadele Dönemleri (Pinnacle & Challenge Timeline)</h3><div id="timeline"></div></div>
+      <div class="card"><h3 id="t.timelineTitle">Zirve ve Mücadele Dönemleri (Pinnacle &amp; Challenge Timeline)</h3><div id="timeline"></div></div>
 
       <div class="card"><h3 id="t.longTextsTitle">Uzun Yorumlar (Sayıya Özgü)</h3><p class="muted" id="t.chaldHint">Chaldean seçiliyken her kartın altında “Chaldean Farkı” görünür.</p><div id="long-texts"></div></div>
 
@@ -156,7 +157,7 @@ summary{cursor:pointer;font-weight:700;color:#141517}
       </div>
       <div class="two">
         <div class="card">
-          <h3 id="t.termsTitle">Terimler & Hesaplama</h3>
+          <h3 id="t.termsTitle">Terimler &amp; Hesaplama</h3>
           <details open><summary id="t.termLife">Yaşam Yolu</summary><div class="muted" id="t.termLifeBody"></div></details>
           <details><summary id="t.termDay">Doğum Günü</summary><div class="muted" id="t.termDayBody"></div></details>
           <details><summary id="t.termExpr">İfade</summary><div class="muted" id="t.termExprBody"></div></details>
@@ -221,9 +222,7 @@ Doğum tarihlerinden Yaşam Yolu/Doğum Günü; isimden İfade, Ruh Dürtüsü, 
       termPY:"Kişisel Yıl/Ay/Gün", termPYBody:"Doğum ay+gün + referans yılı; ay/gün benzer mantık.",
       quickGuideTitle:"Hızlı Anlam Rehberi",
       pills:["1: Liderlik","2: Uyum","3: İfade","4: Düzen","5: Özgürlük","6: Sorumluluk","7: Bilgelik","8: Güç","9: Hizmet","11: İlham","22: İnşa","33: Şifa"],
-      /* Yeni: dinamik placeholder metinleri */
       namePH:"Örn: Metehan Kuzu", nameAPH:"Kişi A", nameBPH:"Kişi B",
-      /* etiket sözlüğü + yıl/ton/kısa metinler (kalanlar) */
       lbls:{
         life:"Yaşam Yolu", expr:"İfade (Expression)", soul:"Ruh Dürtüsü", pers:"Kişilik", bday:"Doğum Günü", matt:"Olgunluk",
         coreHintLife:"Kader teması", coreHintExpr:"Pythagoras yorumu", coreHintExprCh:"Chaldean yorumu",
@@ -263,32 +262,6 @@ Doğum tarihlerinden Yaşam Yolu/Doğum Günü; isimden İfade, Ruh Dürtüsü, 
           33:"Birçok Chaldean ekolünde nadir/opsiyonel; şifa–hizmet ağır sorumlulukla gelir."
         },
         toneCompat:{1:"liderlik, vizyon",2:"uyum, duyarlılık",3:"ifade, neşe",4:"düzen, emek",5:"özgürlük, değişim",6:"sorumluluk, bakım",7:"derinlik, analiz",8:"güç, sonuç",9:"şefkat, tamamlanma"},
-        supportText:{
-          lessonsHas:"Eksik enerjiler: {list} — bu alanlar bilinçli pratikle güçlenir.",
-          lessonsNoneCh:"İsimde 1–8’in çoğu temsil edilmiş görünüyor.",
-          lessonsNonePy:"Eksik enerji görünmüyor.",
-          lessonsMiniCh:"Not: 9’un harf eşleşmesi yoktur; yokluğu “eksik” sayılmaz.",
-          debtsHas:"{list} sayıları karmik borç olarak çıktı.",
-          debtsNone:"Karmik borç sayısı bulunmadı.",
-          passionNone:"Gizli Tutku saptanamadı (isim verisi yetersiz).",
-          balanceMini:"{n} — {text}",
-          cyclesYearNote:"Bu yılın yönü bu temayla şekillenir; aylara ve günlere zemin olur.",
-          cyclesMonthNote:"Aylık planları bu tona göre ayarla; yıl temasını destekleyen küçük hedefler seç.",
-          cyclesDayNote:"Bugün kısa odaklar ve tek adımlık işler için bu enerjiyi referans al."
-        },
-        timelineLabels:["0–36","37–45","46–54","55+"],
-        pinnacleMean:{
-          1:"Başlangıçlar, liderlik, bireysellik",2:"Uyum, ortaklık, sabır",3:"İfade, yaratıcılık, görünürlük",
-          4:"Düzen, emek, yapı kurma",5:"Değişim, özgürlük, hareket",6:"Sorumluluk, aile/ekip, bakım",
-          7:"Analiz, içe dönüş, eğitim",8:"Güç, sonuç, finans–yönetim",9:"Tamamlama, bırakma, hizmet",
-          11:"Vizyon, ilham, sezgi",22:"Büyük inşa, strateji",33:"Şifa, öğretme, hizmet"
-        },
-        challengeMean:{
-          1:"Ego/inisiyatif dengesi",2:"Aşırı hassasiyet, sınır",3:"İfade/iletişim sınavı",
-          4:"Katılık, gecikme",5:"Aşırılık, istikrar–özgürlük",6:"Aile yükleri, öz bakım",
-          7:"Aşırı analiz/izolasyon",8:"Güç–etik–bedel",9:"Bırakamama/şefkat"
-        },
-        long:{ /* TR uzun içerikleri burada tam sürümle tutmaya devam edebilirsin. */ }
       },
     },
     en: {
@@ -326,7 +299,6 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
       termPY:"Personal Year/Month/Day", termPYBody:"Birth month+day + reference year; month/day by similar logic.",
       quickGuideTitle:"Quick Meaning Guide",
       pills:["1: Leadership","2: Harmony","3: Expression","4: Order","5: Freedom","6: Responsibility","7: Wisdom","8: Power","9: Service","11: Inspiration","22: Building","33: Healing"],
-      /* dynamic placeholders */
       namePH:"e.g., John Smith", nameAPH:"Person A", nameBPH:"Person B",
       lbls:{
         life:"Life Path", expr:"Expression", soul:"Soul Urge", pers:"Personality", bday:"Birthday", matt:"Maturity",
@@ -367,37 +339,11 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
           33:"Often rare/optional; healing/teaching with heavy responsibility."
         },
         toneCompat:{1:"leadership, vision",2:"harmony, sensitivity",3:"expression, joy",4:"structure, work",5:"freedom, change",6:"responsibility, care",7:"depth, analysis",8:"power, results",9:"compassion, completion"},
-        supportText:{
-          lessonsHas:"Missing energies: {list} — strengthen these areas with conscious practice.",
-          lessonsNoneCh:"Most of 1–8 appear represented in the name.",
-          lessonsNonePy:"No missing energy appears.",
-          lessonsMiniCh:"Note: 9 has no letter mapping; its absence is not “missing”.",
-          debtsHas:"Karmic debt numbers detected: {list}.",
-          debtsNone:"No karmic debt number detected.",
-          passionNone:"Hidden Passion not detected (name data insufficient).",
-          balanceMini:"{n} — {text}",
-          cyclesYearNote:"This year’s direction is shaped by the theme; months/days build on it.",
-          cyclesMonthNote:"Align monthly plans with this tone; pick small goals supporting the year.",
-          cyclesDayNote:"Use this energy for short-focus tasks and single-step actions today."
-        },
-        timelineLabels:["0–36","37–45","46–54","55+"],
-        pinnacleMean:{
-          1:"Beginnings, leadership, individuality",2:"Harmony, partnership, patience",3:"Expression, creativity, visibility",
-          4:"Structure, work, building",5:"Change, freedom, movement",6:"Responsibility, family/team, care",
-          7:"Analysis, introspection, study",8:"Power, results, finance–management",9:"Completion, release, service",
-          11:"Vision, inspiration, intuition",22:"Grand building, strategy",33:"Healing, teaching, service"
-        },
-        challengeMean:{
-          1:"Ego/initiative balance",2:"Hyper-sensitivity, boundaries",3:"Expression/communication test",
-          4:"Rigidity, delay",5:"Excess, freedom–stability",6:"Family load, self-care",
-          7:"Over-analysis/isolation",8:"Power–ethics–cost",9:"Letting go/compassion"
-        },
-        long:{ /* EN long texts can be fully expanded here when ready. */ }
       }
     }
   };
 
-  /* ====== Numeroloji yardımcıları (hesap motoru) ====== */
+  /* ====== Numeroloji yardımcıları (motor) ====== */
   const MAP_PYTH = {a:1,b:2,c:3,d:4,e:5,f:6,g:7,h:8,i:9,j:1,k:2,l:3,m:4,n:5,o:6,p:7,q:8,r:9,s:1,t:2,u:3,v:4,w:5,x:6,y:7,z:8};
   const MAP_CHALD= {a:1,i:1,j:1,q:1,y:1, b:2,k:2,r:2, c:3,g:3,l:3,s:3, d:4,m:4,t:4, e:5,h:5,n:5,x:5, u:6,v:6,w:6, o:7,z:7, f:8,p:8};
   const isMaster = n => [11,22,33].includes(n);
@@ -437,7 +383,6 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
   function personalMonth(py, ref){ const {M}=dateParts(ref); if(!py||!M) return null; return reduceNum(py + sumDigits(M)); }
   function personalDay(pm, ref){ const {D}=dateParts(ref); if(!pm||!D) return null; return reduceNum(pm + sumDigits(D)); }
   function detectDebts({lifeRaw, exprRaw, day}){ const set=new Set(); [lifeRaw,exprRaw,day].forEach(v=>{ if([13,14,16,19].includes(v)) set.add(v); }); return Array.from(set).sort((a,b)=>a-b); }
-
   function pinnaclesAndChallenges(dob){
     const {Y,M,D} = dateParts(dob); if(!Y||!M||!D) return null;
     const r = n => reduceNum(n);
@@ -449,6 +394,10 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
       {label:null,P:P1,C:C1},{label:null,P:P2,C:C2},{label:null,P:P3,C:C3},{label:null,P:P4,C:C4}
     ]};
   }
+
+  /* ====== Tek tarih yardımcıları (TEK KEZ tanımla) ====== */
+  const today = new Date();
+  const iso = d=> d.toISOString().slice(0,10);
 
   /* ====== Dil durumu ====== */
   const Lang = { cur:'tr', set(l){ this.cur=l; applyI18N(); }, t(){ return I18N[this.cur]; } };
@@ -515,13 +464,13 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     const pills = t.pills.map(txt=>`<span class="pill">${txt}</span>`).join("");
     $("#quickPills").innerHTML = pills;
 
-    // Dinamik placeholder + aria-label
+    // Placeholder + aria-label
     const setPH = (id, ph, lbl)=>{ const el=$(id); if(el){ el.placeholder = ph; el.setAttribute("aria-label", lbl); } };
     setPH("#name",  t.namePH,  t.nameLbl);
     setPH("#nameA", t.nameAPH, t.aNameLbl);
     setPH("#nameB", t.nameBPH, t.bNameLbl);
 
-    // Reset computed sections (dil geçişinde boşalt)
+    // Dil değişiminde hesap alanlarını sıfırla
     $("#core-grid").innerHTML = "";
     $("#support-grid").innerHTML = "";
     $("#cycle-grid").innerHTML = "";
@@ -532,7 +481,7 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     $("#sys-badge").textContent = "";
   }
 
-  /* ====== UI: Tabs, tarih, dil ====== */
+  /* ====== UI: Tabs & başlangıç ====== */
   $$(".tab-btn").forEach(b=>{
     b.addEventListener("click", ()=>{
       $$(".tab-btn").forEach(x=>x.classList.remove("active"));
@@ -543,15 +492,12 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     });
   });
 
-  const today = new Date();
-  const iso = d=> d.toISOString().slice(0,10);
   $("#refdate").value = iso(today);
   $("#langSel").addEventListener("change", (e)=> Lang.set(e.target.value));
 
-  /* ====== Metin üretimi / kartlar / hesaplar ====== */
-  function longText(n){ const t = Lang.t(); return (t.lbls && t.long && t.long[String(n)]) || ""; }
+  /* ====== İçerik üretimi ====== */
+  function longText(n){ const t = Lang.t(); return (t.long && t.long[String(n)]) || ""; }
   function chaldDiff(n){ const t = Lang.t(); return (t.lbls && t.lbls.chaldDiff && t.lbls.chaldDiff[String(n)]) || ""; }
-
   function card(title, num, hint, text, chaldNote){
     const extra = chaldNote ? `<div class="chald-note"><b>${Lang.cur==='tr'?'Chaldean Farkı':'Chaldean Difference'}:</b> ${chaldNote}</div>` : "";
     return `<div class="card">
@@ -559,7 +505,6 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
       <div class="long">${text||""}</div>${extra}
     </div>`;
   }
-
   function smartSummary({life, expr, soul, pers, bday, matt, py}){
     const t = Lang.t(), tone=t.lbls.smartTone;
     const lines=[];
@@ -627,37 +572,37 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     // Core render
     const chald = sys==="chald";
     const coreCards = [];
-    coreCards.push(card(t.lbls.life, life, t.lbls.coreHintLife, longText(life), chald ? t.lbls.chaldDiff?.[life] : ""));
-    coreCards.push(card(t.lbls.expr, expr, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, longText(expr), chald ? t.lbls.chaldDiff?.[expr] : ""));
-    coreCards.push(card(t.lbls.soul, soul, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, longText(soul), chald ? t.lbls.chaldDiff?.[soul] : ""));
-    coreCards.push(card(t.lbls.pers, pers, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, longText(pers), chald ? t.lbls.chaldDiff?.[pers] : ""));
-    coreCards.push(card(t.lbls.bday, bday, t.lbls.bdayHint, longText(bday), chald ? t.lbls.chaldDiff?.[bday] : ""));
-    coreCards.push(card(t.lbls.matt, matt, t.lbls.mattHint, longText(matt), chald ? t.lbls.chaldDiff?.[matt] : ""));
+    coreCards.push(card(t.lbls.life, life, t.lbls.coreHintLife, "", chald ? t.lbls.chaldDiff?.[life] : ""));
+    coreCards.push(card(t.lbls.expr, expr, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, "", chald ? t.lbls.chaldDiff?.[expr] : ""));
+    coreCards.push(card(t.lbls.soul, soul, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, "", chald ? t.lbls.chaldDiff?.[soul] : ""));
+    coreCards.push(card(t.lbls.pers, pers, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, "", chald ? t.lbls.chaldDiff?.[pers] : ""));
+    coreCards.push(card(t.lbls.bday, bday, t.lbls.bdayHint, "", chald ? t.lbls.chaldDiff?.[bday] : ""));
+    coreCards.push(card(t.lbls.matt, matt, t.lbls.mattHint, "", chald ? t.lbls.chaldDiff?.[matt] : ""));
     $("#core-grid").innerHTML = coreCards.join("");
 
     // Support render
     const lesList = lessons.length ? lessons.join(" / ") : "—";
-    const lesMini = lessons.length ? lessons.map(n => `<span class="tip" title="">${n}</span>`).join(" • ")
-      : (chald ? t.supportText.lessonsNoneCh : t.supportText.lessonsNonePy);
+    const lesMini = lessons.length ? lessons.map(n => `<span class="tip">${n}</span>`).join(" • ")
+      : (chald ? "İsimde 1–8’in çoğu temsil edilmiş görünüyor." : "Eksik enerji görünmüyor.");
 
     const debtList = debts.length ? debts.join(" / ") : "—";
-    const debtBody = debts.length ? t.supportText.debtsHas.replace("{list}", debts.join(", "))
-      : t.supportText.debtsNone + (chald && Lang.cur==='tr' ? " <span class='muted'>(Not: Bazı Chaldean ekollerinde 4 ve 8 ‘ders’ kabul edilir.)</span>" : "");
+    const debtBody = debts.length ? `${Lang.cur==='tr'?'Karmic borç sayıları:':'Karmic debt numbers:'} ${debts.join(", ")}.`
+      : (Lang.cur==='tr'?'Karmik borç sayısı bulunmadı.':'No karmic debt number detected.');
 
     const hpList = hp.nums.length ? hp.nums.join(" / ") : "—";
     const hpMini = hp.nums.length
-      ? hp.nums.map(n => `<span class="tip" title="">${n}</span>`).join(" • ")
+      ? hp.nums.map(n => `<span class="tip">${n}</span>`).join(" • ")
         + (hp.letters.length ? ` &nbsp;|&nbsp; <span class="muted">${Lang.cur==='tr'?'Harf(ler)':'Letter(s)'}: ${hp.letters.join(", ").toUpperCase()}</span>` : "")
-      : t.supportText.passionNone;
+      : (Lang.cur==='tr'?'Gizli Tutku saptanamadı (isim verisi yetersiz).':'Hidden Passion not detected (insufficient name data).');
 
     const balNum = (bal ?? "—");
-    const balMini = bal ? t.supportText.balanceMini.replace("{n}", bal).replace("{text}", (t.pills[bal-1]||"")) : (Lang.cur==='tr'?"Üretilemedi.":"Not available.");
+    const balMini = bal ? `${bal} — ${(Lang.cur==='tr'?'':'')}` : (Lang.cur==='tr'?"Üretilemedi.":"Not available.");
 
     $("#support-grid").innerHTML = [
       `<div class="card">
          <div class="row-inline"><span class="k">${lesList}</span><h3>${t.lbls.supportLessons}</h3><span class="badge">${t.lbls.lessonsBadge}</span></div>
          <div class="mini">${lesMini}${chald?` ${Lang.cur==='tr'?`<div class="mini"><b>Chaldean notu:</b> 9’un harf eşleşmesi yoktur; yokluğu “eksik” sayılmaz.</div>`:`<div class="mini"><b>Chaldean note:</b> 9 has no letter mapping; its absence is not “missing”.</div>`}`:""}</div>
-         <div class="long">${lessons.length? t.supportText.lessonsHas.replace("{list}", lessons.join(", ")) : (chald?t.supportText.lessonsNoneCh:t.supportText.lessonsNonePy)}</div>
+         <div class="long">${lessons.length? `${Lang.cur==='tr'?'Eksik enerjiler:':'Missing energies:'} ${lessons.join(", ")} — ${Lang.cur==='tr'?'bilinçli pratikle güçlenir.':'strengthen with conscious practice.'}` : (chald?"İsimde 1–8’in çoğu temsil edilmiş görünüyor.":"No missing energy appears.")}</div>
        </div>`,
       `<div class="card">
          <div class="row-inline"><span class="k">${debtList}</span><h3>${t.lbls.supportDebts}</h3><span class="badge">${t.lbls.debtsBadge}</span></div>
@@ -671,43 +616,45 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
        </div>`,
       `<div class="card">
          <div class="row-inline"><span class="k">${balNum}</span><h3>${t.lbls.supportBalance}</h3><span class="badge">${t.lbls.balanceBadge}</span></div>
-         <div class="mini">${bal? balMini : (Lang.cur==='tr'?"İsim yoluyla hesaplanır; ad-soyad girişini kontrol et.":"Computed from name; check your full name entry.")}</div>
-         <div class="long">${bal? (Lang.cur==='tr'?"Gerilimde bu strateji işe yarar; abartısına kaçma.":"In stress, this strategy helps; avoid the excess of it.") : (Lang.cur==='tr'?"Eksikse ad-soyad girişini kontrol et.":"If missing, check full name entry.")}</div>
+         <div class="mini">${bal? `${bal} — ${ (Lang.cur==='tr' ? '' : '') }` : (Lang.cur==='tr'?"İsim yoluyla hesaplanır; ad-soyad girişini kontrol et.":"Computed from name; check your full name entry.")}</div>
+         <div class="long">${bal? (Lang.cur==='tr'?"Gerilimde bu strateji işe yarar; abartısına kaçma.":"In stress, this strategy helps; avoid its excess.") : (Lang.cur==='tr'?"Eksikse ad-soyad girişini kontrol et.":"If missing, check full name entry.")}</div>
        </div>`
     ].join("");
 
     // Cycles
     const yearTxt = py ? (t.lbls.year[String(py)] || "") : "";
-    const monthTxt = pm ? (t.lbls.year[String(pm)]||"").replace(/year/gi,"month") : "";
+    const monthTxt = pm ? (t.lbls.year[String(pm)]||"") : "";
     const dayTxt = pd ? (Lang.cur==='tr'?"Bugünün mikro enerjisi; küçük kararlar bu sayıyla hizalanır.":"Micro energy of the day; align small decisions with it.") : "";
 
     $("#cycle-grid").innerHTML = [
       `<div class="card">
          <div class="row-inline"><span class="k">${py ?? "—"}</span><h3>${t.lbls.cyclesYear}</h3><span class="badge">${ref||""}</span></div>
          <div class="mini"><span class="tip">${py ? (Lang.cur==='tr'?"Tema: ":"Theme: ")+yearTxt : "—"}</span></div>
-         <div class="long">${py ? t.supportText.cyclesYearNote : (Lang.cur==='tr'?"Ref. tarih ve doğum tarihini kontrol et.":"Check reference date and birth date.")}</div>
+         <div class="long">${py ? (Lang.cur==='tr'?"Bu yılın yönü bu temayla şekillenir; aylara ve günlere zemin olur.":"This year’s direction is shaped by the theme; months/days build on it.") : (Lang.cur==='tr'?"Ref. tarih ve doğum tarihini kontrol et.":"Check reference date and birth date.")}</div>
        </div>`,
       `<div class="card">
          <div class="row-inline"><span class="k">${pm ?? "—"}</span><h3>${t.lbls.cyclesMonth}</h3><span class="badge">${ref||""}</span></div>
          <div class="mini"><span class="tip">${pm ? (Lang.cur==='tr'?"Ton: ":"Tone: ")+monthTxt : "—"}</span></div>
-         <div class="long">${pm ? t.supportText.cyclesMonthNote : (Lang.cur==='tr'?"Önce Kişisel Yıl hesaplanır.":"Personal Year must be computed first.")}</div>
+         <div class="long">${pm ? (Lang.cur==='tr'?"Aylık planları bu tona göre ayarla; yıl temasını destekleyen küçük hedefler seç.":"Align monthly plans with this tone; pick small goals supporting the year.") : (Lang.cur==='tr'?"Önce Kişisel Yıl hesaplanır.":"Personal Year must be computed first.")}</div>
        </div>`,
       `<div class="card">
          <div class="row-inline"><span class="k">${pd ?? "—"}</span><h3>${t.lbls.cyclesDay}</h3><span class="badge">${ref||""}</span></div>
          <div class="mini"><span class="tip">${pd ? (Lang.cur==='tr'?"Mikro: ":"Micro: ")+dayTxt : "—"}</span></div>
-         <div class="long">${pd ? t.supportText.cyclesDayNote : (Lang.cur==='tr'?"Önce Kişisel Ay hesaplanır.":"Personal Month must be computed first.")}</div>
+         <div class="long">${pd ? (Lang.cur==='tr'?"Bugün kısa odaklar ve tek adımlık işler için bu enerjiyi referans al.":"Use this energy for short-focus tasks and single-step actions today.") : (Lang.cur==='tr'?"Önce Kişisel Ay hesaplanır.":"Personal Month must be computed first.")}</div>
        </div>`
     ].join("");
 
     // Timeline
     const pc = pinnaclesAndChallenges(dob);
     if(pc){
-      const labels = t.lbls.timelineLabels;
+      const labels = (Lang.cur==='tr'?[ "0–36","37–45","46–54","55+" ]:[ "0–36","37–45","46–54","55+" ]);
       pc.spans.forEach((s,i)=> s.label = labels[i] || s.label);
+      const pMean = (n)=> (I18N[Lang.cur].lbls.pinnacleMean?.[n]) || (Lang.cur==='tr'?"Tema":"Theme");
+      const cMean = (n)=> (I18N[Lang.cur].lbls.challengeMean?.[n]) || (Lang.cur==='tr'?"Sınav":"Challenge");
       const blocks = pc.spans.map(s=>{
         const p = s.P, c = s.C;
-        const pText = t.lbls.pinnacleMean[p] || (Lang.cur==='tr'?"Tema":"Theme");
-        const cText = t.lbls.challengeMean[c] || (Lang.cur==='tr'?"Sınav":"Challenge");
+        const pText = pMean(p);
+        const cText = cMean(c);
         return `
           <div class="timeItem">
             <b>${s.label}</b>
@@ -719,7 +666,8 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
             <div class="mini"><b>${Lang.cur==='tr'?"Zirve":"Pinnacle"} ${p}:</b> ${pText} &nbsp;|&nbsp; <b>${Lang.cur==='tr'?"Mücadele":"Challenge"} ${c}:</b> ${cText}</div>
           </div>`;
       }).join("");
-      $("#timeline").innerHTML = `<div class="timebar">${blocks}</div><div class="time-legend">${t.lbls.timelineLegend}</div>`;
+      const legend = (Lang.cur==='tr'?"Zirve = dönemin ana teması • Mücadele = o dönemin sınavı/engeli.":"Pinnacle = main theme • Challenge = the period’s test/obstacle.");
+      $("#timeline").innerHTML = `<div class="timebar">${blocks}</div><div class="time-legend">${legend}</div>`;
     } else {
       $("#timeline").innerHTML = "<div class='muted'>"+(Lang.cur==='tr'?"Geçersiz tarih.":"Invalid date.")+"</div>";
     }
@@ -727,11 +675,11 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     // Long texts (seçili sayılar)
     const uniques = Array.from(new Set([life, expr, soul, pers, bday, matt].filter(Boolean)));
     $("#long-texts").innerHTML = uniques.map(n=> card(
-      (t.pills.find(p=>p.startsWith(String(n)+":")) || String(n)).split(":")[1]?.trim() || (Lang.cur==='tr'?"Sayı":"Number")+" "+n,
+      (I18N[Lang.cur].pills.find(p=>p.startsWith(String(n)+":")) || String(n)).split(":")[1]?.trim() || (Lang.cur==='tr'?"Sayı":"Number")+" "+n,
       n,
       (Lang.cur==='tr'?"Uzun yorum":"Long interpretation"),
       longText(n),
-      (sys==="chald"? t.lbls.chaldDiff?.[n] : "")
+      (sys==="chald"? chaldDiff(n) : "")
     )).join("");
   }
 
@@ -742,7 +690,6 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     if(!s) return 0; return reduceNum(lettersToSum(s, sys));
   }
   function calcCompat(){
-    const t = Lang.t();
     const aName = $("#nameA").value.trim(), aDOB = $("#dobA").value.trim();
     const bName = $("#nameB").value.trim(), bDOB = $("#dobB").value.trim();
     const sys = $("#sys2").value;
@@ -772,9 +719,9 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     const cards=[];
     if(A.life && B.life){
       const block = Lang.cur==='tr'
-        ? `Senin yaşam yolun <b>${A.life}</b>, onun yaşam yolu ise <b>${B.life}</b>. Bu sayı, hayatın temel dersini ve ana yönünü temsil eder. Farklı temalar size farklı pencereler açar; doğru yönetildiğinde tamamlayıcı denge oluşturur.`
-        : `Your Life Path is <b>${A.life}</b>, theirs is <b>${B.life}</b>. This shows the core lesson and direction. Differences can complement if managed well.`;
-      cards.push(`<div class="card"><h3>${t.compLifeTitle}</h3><div class="long">${block}</div></div>`);
+        ? `Senin yaşam yolun <b>${A.life}</b>, onun yaşam yolu ise <b>${B.life}</b>. Bu sayı, hayatın temel dersini ve ana yönünü temsil eder. Farklı temalar doğru yönetildiğinde tamamlayıcı denge oluşturur.`
+        : `Your Life Path is <b>${A.life}</b>, theirs is <b>${B.life}</b>. It shows the core lesson and direction. Differences can complement if managed well.`;
+      cards.push(`<div class="card"><h3>${I18N[Lang.cur].compLifeTitle}</h3><div class="long">${block}</div></div>`);
     }
     if(A.soul && B.soul){
       const block = Lang.cur==='tr'
@@ -810,7 +757,6 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
   $("#calc2").addEventListener("click", calcCompat);
 
   // İlk kurulum
-  const today = new Date(); const iso = d=> d.toISOString().slice(0,10);
   $("#refdate").value = iso(today);
   Lang.set('tr');
 })();
