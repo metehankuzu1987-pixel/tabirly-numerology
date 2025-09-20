@@ -1,15 +1,11 @@
-<!-- Tabirly • Numeroloji Falı (Deluxe) — Clean v4.0 Bilingual (TR/EN) -->
+<!-- Tabirly • Numeroloji Falı (Deluxe) — Clean v4.1 Bilingual (TR/EN, dynamic placeholders) -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
 <style>
 :root{
-  /* Pastel palet (korundu) */
   --p1:#E87C6D; --p2:#EBA76D; --p3:#E8926D; --p4:#E86D82; --p5:#E8BA6D; --p6:#F0A88D;
-  /* Açık tema yüzeyler + tipografi */
   --page:#FFF9F6; --panel:#FFF6F1; --card:#FFFCFA; --card-alt:#FFF7F3; --border:#F2D5C9;
   --txt:#111213; --muted:#4A4F57;
-  /* Vurgu */
   --acc1:var(--p3); --acc2:var(--p4);
-  /* Ölçüler */
   --rad:16px; --pad:clamp(14px,2vw,18px); --w:1080px;
 }
 .tb-all *{box-sizing:border-box}
@@ -66,10 +62,8 @@ summary{cursor:pointer;font-weight:700;color:#141517}
 .tip{border-bottom:1px dashed rgba(0,0,0,.35);cursor:help}
 .timeItem .mini{margin-top:6px;font-size:.9rem;color:#2b3138;line-height:1.35}
 .time-legend{margin-top:8px;font-size:.9rem;color:#4A4F57}
-/* Responsive/Print */
 @media (max-width:760px){.grid,.results,.two{grid-template-columns:1fr}}
 @media print{body{background:#fff}.tabs,.btns,.tb-head .lang{display:none}}
-/* Mobilde buton bloğu */
 @media (max-width:760px){
   .btns{flex-direction: column;align-items: stretch}
   .btns button, .btns .sec{width: 100%;text-align: center}
@@ -79,15 +73,10 @@ summary{cursor:pointer;font-weight:700;color:#141517}
 <div class="tb-all" id="tb-all">
   <div class="wrap">
     <div class="tb-head">
-      <div class="left">
-        <h2 id="t.title">Tabirly • Numeroloji Falı</h2>
-      </div>
+      <div class="left"><h2 id="t.title">Tabirly • Numeroloji Falı</h2></div>
       <div class="lang">
         <label for="langSel" id="t.langLabel">Dil</label>
-        <select id="langSel">
-          <option value="tr">Türkçe</option>
-          <option value="en">English</option>
-        </select>
+        <select id="langSel"><option value="tr">Türkçe</option><option value="en">English</option></select>
       </div>
     </div>
 
@@ -103,7 +92,7 @@ summary{cursor:pointer;font-weight:700;color:#141517}
     <!-- TEK KİŞİ -->
     <div class="panel active" id="panel-tek">
       <div class="grid">
-        <div><label id="t.nameLbl">Tam İsim (resmi)</label><input id="name" placeholder="Örn: Metehan Kuzu" type="text" /></div>
+        <div><label id="t.nameLbl">Tam İsim (resmi)</label><input id="name" type="text" /></div>
         <div><label id="t.dobLbl">Doğum Tarihi</label><input id="dob" type="date" /></div>
         <div><label id="t.refLbl">Kişisel Yıl/Ay/Gün Referans Tarihi</label><input id="refdate" type="date" /></div>
         <div><label id="t.sysLbl">Sistem</label>
@@ -114,43 +103,24 @@ summary{cursor:pointer;font-weight:700;color:#141517}
         </div>
       </div>
       <div class="btns">
-        <button id="calc"    ><span id="t.calcBtn">Hesapla</span></button>
+        <button id="calc"><span id="t.calcBtn">Hesapla</span></button>
         <button class="sec" id="copy"><span id="t.copyBtn">Kopyala</span></button>
         <button class="sec" id="print"><span id="t.printBtn">Yazdır / PDF</span></button>
-        <span class="muted" style="font-size: x-small;" id="t.chald9">Chaldean’da 9 rakamı harf eşleşmesinde yoktur; sadece toplamdan doğarsa görünür.</span>
+        <span class="muted" style="font-size:x-small;" id="t.chald9">Chaldean’da 9 rakamı harf eşleşmesinde yoktur; sadece toplamdan doğarsa görünür.</span>
       </div>
 
-      <div class="card">
-        <h3 id="t.smartTitle">Akıllı Özet</h3>
-        <div class="long muted" id="smart-summary" data-default="smartDefault">Sonuçları hesapla; kişisel özet burada oluşacak.</div>
-      </div>
+      <div class="card"><h3 id="t.smartTitle">Akıllı Özet</h3><div class="long muted" id="smart-summary" data-default="smartDefault">Sonuçları hesapla; kişisel özet burada oluşacak.</div></div>
 
-      <div class="card" id="out-core">
-        <h3><span id="t.coreTitle">Çekirdek Sayılar</span> <span class="badge" id="sys-badge"></span></h3>
-        <div class="results" id="core-grid"></div>
-      </div>
+      <div class="card" id="out-core"><h3><span id="t.coreTitle">Çekirdek Sayılar</span> <span class="badge" id="sys-badge"></span></h3><div class="results" id="core-grid"></div></div>
 
       <div class="two" id="out-support">
-        <div class="card">
-          <h3 id="t.supportTitle">Destekleyici Sayılar</h3>
-          <div class="results" id="support-grid"></div>
-        </div>
-        <div class="card">
-          <h3 id="t.cyclesTitle">Zaman Döngüleri</h3>
-          <div class="results" id="cycle-grid"></div>
-        </div>
+        <div class="card"><h3 id="t.supportTitle">Destekleyici Sayılar</h3><div class="results" id="support-grid"></div></div>
+        <div class="card"><h3 id="t.cyclesTitle">Zaman Döngüleri</h3><div class="results" id="cycle-grid"></div></div>
       </div>
 
-      <div class="card">
-        <h3 id="t.timelineTitle">Zirve ve Mücadele Dönemleri (Pinnacle & Challenge Timeline)</h3>
-        <div id="timeline"></div>
-      </div>
+      <div class="card"><h3 id="t.timelineTitle">Zirve ve Mücadele Dönemleri (Pinnacle & Challenge Timeline)</h3><div id="timeline"></div></div>
 
-      <div class="card">
-        <h3 id="t.longTextsTitle">Uzun Yorumlar (Sayıya Özgü)</h3>
-        <p class="muted" id="t.chaldHint">Chaldean seçiliyken her kartın altında “Chaldean Farkı” görünür.</p>
-        <div id="long-texts"></div>
-      </div>
+      <div class="card"><h3 id="t.longTextsTitle">Uzun Yorumlar (Sayıya Özgü)</h3><p class="muted" id="t.chaldHint">Chaldean seçiliyken her kartın altında “Chaldean Farkı” görünür.</p><div id="long-texts"></div></div>
 
       <div class="foot">© Tabirly</div>
     </div>
@@ -158,12 +128,11 @@ summary{cursor:pointer;font-weight:700;color:#141517}
     <!-- UYUMLULUK -->
     <div class="panel" id="panel-uyum">
       <div class="grid">
-        <div><label id="t.aNameLbl">İsim A</label><input id="nameA" placeholder="Kişi A" type="text" /></div>
+        <div><label id="t.aNameLbl">İsim A</label><input id="nameA" type="text" /></div>
         <div><label id="t.aDobLbl">Doğum A</label><input id="dobA" type="date" /></div>
-        <div><label id="t.bNameLbl">İsim B</label><input id="nameB" placeholder="Kişi B" type="text" /></div>
+        <div><label id="t.bNameLbl">İsim B</label><input id="nameB" type="text" /></div>
         <div><label id="t.bDobLbl">Doğum B</label><input id="dobB" type="date" /></div>
-        <div>
-          <label id="t.sysLbl2">Sistem</label>
+        <div><label id="t.sysLbl2">Sistem</label>
           <select id="sys2">
             <option value="pyth" id="t.sysP2">Pythagoras (Modern)</option>
             <option value="chald" id="t.sysC2">Chaldean (Babil)</option>
@@ -183,9 +152,7 @@ summary{cursor:pointer;font-weight:700;color:#141517}
     <div class="panel" id="panel-bilgi">
       <div class="card">
         <h3 id="t.howTitle">Bu Araç Nasıl Çalışır?</h3>
-        <p class="long" id="t.howBody">
-          <!-- JS doldurur -->
-        </p>
+        <p class="long" id="t.howBody"></p>
       </div>
       <div class="two">
         <div class="card">
@@ -204,9 +171,7 @@ summary{cursor:pointer;font-weight:700;color:#141517}
         </div>
         <div class="card">
           <h3 id="t.quickGuideTitle">Hızlı Anlam Rehberi</h3>
-          <p id="quickPills">
-            <!-- JS doldurur -->
-          </p>
+          <p id="quickPills"></p>
         </div>
       </div>
     </div>
@@ -219,44 +184,25 @@ summary{cursor:pointer;font-weight:700;color:#141517}
   const $ = s=>document.querySelector(s);
   const $$ = s=>document.querySelectorAll(s);
 
-  /* =========================
-     1) Çok dilli içerik sözlüğü
-     ========================= */
+  /* ============= I18N ============= */
   const I18N = {
     tr: {
-      title: "Tabirly • Numeroloji Falı",
+      title:"Tabirly • Numeroloji Falı",
       langLabel:"Dil",
       tagline:"Pythagoras ↔ Chaldean, Akıllı Özet, Uyumluluk, Timeline. Tüm hesaplamalar tarayıcıda. Yani bize hiçbir bilginiz iletilmiyor.",
       note:"Normalde bu denli iddialarda bulunmayı sevmem ama bence profesyonel bir numeroloğun danışanları için kullanabileceği bir sisteme çok yakın oldu. Biraz karışık gelebilir; o yüzden her şeyi açık yazdım. Aklına takılanı alta yaz, cevaplarım. Ücretsiz.",
       tabs:["Tek Kişi","Uyumluluk (2 Kişi)","Bilgi"],
-      nameLbl:"Tam İsim (resmi)",
-      dobLbl:"Doğum Tarihi",
-      refLbl:"Kişisel Yıl/Ay/Gün Referans Tarihi",
-      sysLbl:"Sistem",
-      sysP:"Pythagoras (Modern)",
-      sysC:"Chaldean (Babil)",
-      calcBtn:"Hesapla",
-      copyBtn:"Kopyala",
-      printBtn:"Yazdır / PDF",
+      nameLbl:"Tam İsim (resmi)", dobLbl:"Doğum Tarihi", refLbl:"Kişisel Yıl/Ay/Gün Referans Tarihi",
+      sysLbl:"Sistem", sysP:"Pythagoras (Modern)", sysC:"Chaldean (Babil)",
+      calcBtn:"Hesapla", copyBtn:"Kopyala", printBtn:"Yazdır / PDF",
       chald9:"Chaldean’da 9 rakamı harf eşleşmesinde yoktur; sadece toplamdan doğarsa görünür.",
-      smartTitle:"Akıllı Özet",
-      smartDefault:"Sonuçları hesapla; kişisel özet burada oluşacak.",
-      coreTitle:"Çekirdek Sayılar",
-      supportTitle:"Destekleyici Sayılar",
-      cyclesTitle:"Zaman Döngüleri",
+      smartTitle:"Akıllı Özet", smartDefault:"Sonuçları hesapla; kişisel özet burada oluşacak.",
+      coreTitle:"Çekirdek Sayılar", supportTitle:"Destekleyici Sayılar", cyclesTitle:"Zaman Döngüleri",
       timelineTitle:"Zirve ve Mücadele Dönemleri (Pinnacle & Challenge Timeline)",
-      longTextsTitle:"Uzun Yorumlar (Sayıya Özgü)",
-      chaldHint:"Chaldean seçiliyken her kartın altında “Chaldean Farkı” görünür.",
-      aNameLbl:"İsim A",
-      aDobLbl:"Doğum A",
-      bNameLbl:"İsim B",
-      bDobLbl:"Doğum B",
-      sysLbl2:"Sistem",
-      sysP2:"Pythagoras (Modern)",
-      sysC2:"Chaldean (Babil)",
-      calc2Btn:"Uyumluluğu Hesapla",
-      compSumTitle:"Özet",
-      compLifeTitle:"Temel Uyum (Yaşam Yolu)",
+      longTextsTitle:"Uzun Yorumlar (Sayıya Özgü)", chaldHint:"Chaldean seçiliyken her kartın altında “Chaldean Farkı” görünür.",
+      aNameLbl:"İsim A", aDobLbl:"Doğum A", bNameLbl:"İsim B", bDobLbl:"Doğum B",
+      sysLbl2:"Sistem", sysP2:"Pythagoras (Modern)", sysC2:"Chaldean (Babil)", calc2Btn:"Uyumluluğu Hesapla",
+      compSumTitle:"Özet", compLifeTitle:"Temel Uyum (Yaşam Yolu)",
       howTitle:"Bu Araç Nasıl Çalışır?",
       howBody:`<b>Pythagoras</b>: Harfler 1–9’a eşit dağılır (TR normalizasyonu: ç→c, ğ→g, ı/İ→i, ö→o, ş→s, ü→u).
 <b>Chaldean</b>: A,I,J,Q,Y→1; B,K,R→2; C,G,L,S→3; D,M,T→4; E,H,N,X→5; U,V,W→6; O,Z→7; F,P→8. <u>9 rakamı harf eşleşmesinde yok</u>.
@@ -275,6 +221,9 @@ Doğum tarihlerinden Yaşam Yolu/Doğum Günü; isimden İfade, Ruh Dürtüsü, 
       termPY:"Kişisel Yıl/Ay/Gün", termPYBody:"Doğum ay+gün + referans yılı; ay/gün benzer mantık.",
       quickGuideTitle:"Hızlı Anlam Rehberi",
       pills:["1: Liderlik","2: Uyum","3: İfade","4: Düzen","5: Özgürlük","6: Sorumluluk","7: Bilgelik","8: Güç","9: Hizmet","11: İlham","22: İnşa","33: Şifa"],
+      /* Yeni: dinamik placeholder metinleri */
+      namePH:"Örn: Metehan Kuzu", nameAPH:"Kişi A", nameBPH:"Kişi B",
+      /* etiket sözlüğü + yıl/ton/kısa metinler (kalanlar) */
       lbls:{
         life:"Yaşam Yolu", expr:"İfade (Expression)", soul:"Ruh Dürtüsü", pers:"Kişilik", bday:"Doğum Günü", matt:"Olgunluk",
         coreHintLife:"Kader teması", coreHintExpr:"Pythagoras yorumu", coreHintExprCh:"Chaldean yorumu",
@@ -339,30 +288,7 @@ Doğum tarihlerinden Yaşam Yolu/Doğum Günü; isimden İfade, Ruh Dürtüsü, 
           4:"Katılık, gecikme",5:"Aşırılık, istikrar–özgürlük",6:"Aile yükleri, öz bakım",
           7:"Aşırı analiz/izolasyon",8:"Güç–etik–bedel",9:"Bırakamama/şefkat"
         },
-        long: { /* 1–9, 11, 22, 33 uzun metinler TR (mevcut) */
-          1:`1 sayısı bağımsızlık, başlangıç ve öncülük enerjisidir...`, 2:`2 sayısı uyum, işbirliği ve diplomasi titreşimidir...`,
-          3:`3 sayısı ifade, yaratıcılık ve neşe akışıdır...`, 4:`4 sayısı emek, düzen ve yapı kurmadır...`,
-          5:`5 sayısı özgürlük, değişim ve keşiftir...`, 6:`6 sayısı sevgi, bakım ve sorumluluk frekansıdır...`,
-          7:`7 sayısı içgörü, analiz ve manevi derinliktir...`, 8:`8 sayısı güç, yönetim ve maddi ustalıktır...`,
-          9:`9 sayısı idealizm, şefkat ve tamamlanmadır...`, 11:`11 sezgi, ilham ve vizyonun ustalığıdır...`,
-          22:`22 “Usta İnşacı”dır...`, 33:`33 “Usta Öğretmen/Şifacı”dır...`
-        },
-        labels:{
-          needNameDob:"İsim ve doğum tarihi zorunlu.",
-          fillFirst:"İsim ve doğum tarihi gir, sonra Hesapla.",
-          invalidDate:"Geçersiz tarih.",
-          twoNeed:"İki isim ve iki doğum tarihi gerekli."
-        },
-        compat:{
-          strong:"Güçlü uyum.", tension:"Potansiyel gerilim.",
-          summaryDefault:"Temel uyum dengeli görünüyor.",
-          pairNote_1_8:"1 ve 8 kombinasyonu güçlü liderlik sinerjisi getirir... Çözüm: paylaşımcı liderlik ve açık iletişim.",
-          pairNote_4_5:"4 ve 5 kombinasyonu düzen ve özgürlük dersini gündeme taşır... Çözüm: net sınırlar ve ortak tempo.",
-          pairNote_2_6:"2 ve 6 kombinasyonu uyum ve bakım enerjisini yükseltir... Çözüm: sınırlar ve karşılıklı öz bakım.",
-          lifeBlock:`Senin yaşam yolun <b>{A}</b>, onun yaşam yolu ise <b>{B}</b>. Bu sayı, hayatın temel dersini ve ana yönünü temsil eder. Farklı temalar size farklı pencereler açar; doğru yönetildiğinde tamamlayıcı denge oluşturur.`,
-          soulBlock:`Senin ruh dürtün <b>{A}</b>, onun ruh dürtüsü <b>{B}</b>. Kalbin derin arzusu. Farklıysa tarafların ihtiyacını anlamak kritik; benzerse akış kolaylaşır.`,
-          persBlock:`Senin kişilik sayın <b>{A}</b>, onun kişilik sayısı <b>{B}</b>. Dış imaj/ilk izlenim. Farklılık çekici kontrast yaratabilir; uzun vadede sürtüşmeye dönüşebilir — doğru kullanılırsa tamamlar.`
-        }
+        long:{ /* TR uzun içerikleri burada tam sürümle tutmaya devam edebilirsin. */ }
       },
     },
     en: {
@@ -385,7 +311,7 @@ Doğum tarihlerinden Yaşam Yolu/Doğum Günü; isimden İfade, Ruh Dürtüsü, 
       howTitle:"How does this tool work?",
       howBody:`<b>Pythagoras</b>: Letters map evenly to 1–9 (TR normalization: ç→c, ğ→g, ı/İ→i, ö→o, ş→s, ü→u).
 <b>Chaldean</b>: A,I,J,Q,Y→1; B,K,R→2; C,G,L,S→3; D,M,T→4; E,H,N,X→5; U,V,W→6; O,Z→7; F,P→8. <u>9 is not mapped to letters</u>.
-From birth date we compute Life Path/Birthday; from the name we compute Expression, Soul Urge, Personality, Hidden Passion, Balance. Karmic Lessons: energies not represented in the name; Karmic Debts: 13/14/16/19. Personal Year/Month/Day is the rhythm set by your chosen date.`,
+From birth date we compute Life Path/Birthday; from the name we compute Expression, Soul Urge, Personality, Hidden Passion, Balance. Karmic Lessons: energies not represented in the name; Karmic Debts: 13/14/16/19. Personal Year/Month/Day follows your chosen reference date.`,
       termsTitle:"Terms & Calculations",
       termLife:"Life Path", termLifeBody:"Sum all digits in the birth date; keep 11/22/33.",
       termDay:"Birthday", termDayBody:"Day of month; 11/22 may be kept.",
@@ -400,6 +326,8 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
       termPY:"Personal Year/Month/Day", termPYBody:"Birth month+day + reference year; month/day by similar logic.",
       quickGuideTitle:"Quick Meaning Guide",
       pills:["1: Leadership","2: Harmony","3: Expression","4: Order","5: Freedom","6: Responsibility","7: Wisdom","8: Power","9: Service","11: Inspiration","22: Building","33: Healing"],
+      /* dynamic placeholders */
+      namePH:"e.g., John Smith", nameAPH:"Person A", nameBPH:"Person B",
       lbls:{
         life:"Life Path", expr:"Expression", soul:"Soul Urge", pers:"Personality", bday:"Birthday", matt:"Maturity",
         coreHintLife:"Fate theme", coreHintExpr:"Pythagoras view", coreHintExprCh:"Chaldean view",
@@ -422,18 +350,18 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
           6:"Responsibility, family/team, care and quality. Home and relations highlight.",
           7:"Introspection, study, spiritual depth. Meaning over speed.",
           8:"Power, results, finance and management. Hit big goals.",
-          9:"Closure, release, compassion and service. Let go to make space for new."
+          9:"Closure, release, compassion and service. Make space for the new."
         },
         chaldDiff:{
           1:"Will is tested through karma; humility and patience in leadership.",
-          2:"Sensitivity has a fated tone; boundary-setting is emphasized.",
+          2:"Sensitivity carries a fated tone; boundaries are emphasized.",
           3:"Word-vibration seen as occult; responsibility for speech is stronger.",
           4:"More restrictive; delay, burden and repayment themes.",
-          5:"If change turns excessive, the cost comes fast; self-discipline is key.",
-          6:"Family/collective duties appear karmic; service-without-self-loss is the lesson.",
-          7:"Research–spirit axis intensifies; seclusion and secret knowledge.",
-          8:"Saturnic effect; law of power–cost bites harder. Ethical tests concentrate.",
-          9:"Not mapped from letters; when it emerges, it signals spiritual closure.",
+          5:"If change becomes excessive, the price comes fast; self-discipline is key.",
+          6:"Family/collective duties look karmic; serve without losing yourself.",
+          7:"Research–spirit axis intensifies; seclusion and esoteric knowledge.",
+          8:"Saturnian effect; the power–cost law bites harder. Ethical tests cluster.",
+          9:"Not mapped from letters; when emerging from totals, signals spiritual closure.",
           11:"Vision/inspiration master; balance sensitivity with grounding.",
           22:"Master builder persists; weight varies by school; patience/humility key.",
           33:"Often rare/optional; healing/teaching with heavy responsibility."
@@ -448,7 +376,7 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
           debtsNone:"No karmic debt number detected.",
           passionNone:"Hidden Passion not detected (name data insufficient).",
           balanceMini:"{n} — {text}",
-          cyclesYearNote:"This year’s direction is shaped by the theme; months/days sit on it.",
+          cyclesYearNote:"This year’s direction is shaped by the theme; months/days build on it.",
           cyclesMonthNote:"Align monthly plans with this tone; pick small goals supporting the year.",
           cyclesDayNote:"Use this energy for short-focus tasks and single-step actions today."
         },
@@ -464,37 +392,12 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
           4:"Rigidity, delay",5:"Excess, freedom–stability",6:"Family load, self-care",
           7:"Over-analysis/isolation",8:"Power–ethics–cost",9:"Letting go/compassion"
         },
-        long:{
-          1:`Number 1 carries independence, beginnings and leadership...`, 2:`Number 2 is harmony, cooperation and diplomacy...`,
-          3:`Number 3 is expression, creativity and joy...`, 4:`Number 4 is work, structure and building...`,
-          5:`Number 5 is freedom, change and exploration...`, 6:`Number 6 is love, care and responsibility...`,
-          7:`Number 7 is insight, analysis and spiritual depth...`, 8:`Number 8 is power, management and material mastery...`,
-          9:`Number 9 is idealism, compassion and completion...`, 11:`Eleven is mastery of intuition and inspiration...`,
-          22:`Twenty-two is the Master Builder...`, 33:`Thirty-three is the Master Teacher/Healer...`
-        },
-        labels:{
-          needNameDob:"Full name and date of birth are required.",
-          fillFirst:"Enter full name and date of birth, then press Calculate.",
-          invalidDate:"Invalid date.",
-          twoNeed:"Two names and two birth dates are required."
-        },
-        compat:{
-          strong:"Strong harmony.", tension:"Potential tension.",
-          summaryDefault:"Overall compatibility looks balanced.",
-          pairNote_1_8:"1 & 8 bring strong leadership synergy... Solution: shared leadership and clear communication.",
-          pairNote_4_5:"4 & 5 ask for structure–freedom balance... Solution: clear boundaries and a shared tempo.",
-          pairNote_2_6:"2 & 6 amplify harmony and care... Solution: boundaries and mutual self-care.",
-          lifeBlock:`Your Life Path is <b>{A}</b>, theirs is <b>{B}</b>. This number shows your core lesson and direction. Differences can be complementary if managed well.`,
-          soulBlock:`Your Soul Urge is <b>{A}</b>, theirs is <b>{B}</b>. If very different, understand each other’s needs; if similar, flow becomes easier.`,
-          persBlock:`Your Personality number is <b>{A}</b>, theirs is <b>{B}</b>. Contrast can be attractive but may rub over time — use it to complement, not clash.`
-        }
+        long:{ /* EN long texts can be fully expanded here when ready. */ }
       }
     }
   };
 
-  /* =========================
-     2) Numeroloji yardımcıları
-     ========================= */
+  /* ====== Numeroloji yardımcıları (hesap motoru) ====== */
   const MAP_PYTH = {a:1,b:2,c:3,d:4,e:5,f:6,g:7,h:8,i:9,j:1,k:2,l:3,m:4,n:5,o:6,p:7,q:8,r:9,s:1,t:2,u:3,v:4,w:5,x:6,y:7,z:8};
   const MAP_CHALD= {a:1,i:1,j:1,q:1,y:1, b:2,k:2,r:2, c:3,g:3,l:3,s:3, d:4,m:4,t:4, e:5,h:5,n:5,x:5, u:6,v:6,w:6, o:7,z:7, f:8,p:8};
   const isMaster = n => [11,22,33].includes(n);
@@ -543,19 +446,12 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     const C1 = r(Math.abs(rd - rm)), C2 = r(Math.abs(rd - ry));
     const C3 = r(Math.abs(C1 - C2)), C4 = r(Math.abs(rm - ry));
     return {spans:[
-      {label: null, P:P1, C:C1},{label:null, P:P2, C:C2},
-      {label:null, P:P3, C:C3},{label:null, P:P4, C:C4}
+      {label:null,P:P1,C:C1},{label:null,P:P2,C:C2},{label:null,P:P3,C:C3},{label:null,P:P4,C:C4}
     ]};
   }
 
-  /* =========================
-     3) Dil yardımcıları + UI doldurma
-     ========================= */
-  const Lang = {
-    cur: 'tr',
-    set(l){ this.cur = l; applyI18N(); },
-    t(){ return I18N[this.cur]; }
-  };
+  /* ====== Dil durumu ====== */
+  const Lang = { cur:'tr', set(l){ this.cur=l; applyI18N(); }, t(){ return I18N[this.cur]; } };
 
   function applyI18N(){
     const t = Lang.t();
@@ -619,7 +515,13 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     const pills = t.pills.map(txt=>`<span class="pill">${txt}</span>`).join("");
     $("#quickPills").innerHTML = pills;
 
-    // Reset computed sections (so user sees current language before computing)
+    // Dinamik placeholder + aria-label
+    const setPH = (id, ph, lbl)=>{ const el=$(id); if(el){ el.placeholder = ph; el.setAttribute("aria-label", lbl); } };
+    setPH("#name",  t.namePH,  t.nameLbl);
+    setPH("#nameA", t.nameAPH, t.aNameLbl);
+    setPH("#nameB", t.nameBPH, t.bNameLbl);
+
+    // Reset computed sections (dil geçişinde boşalt)
     $("#core-grid").innerHTML = "";
     $("#support-grid").innerHTML = "";
     $("#cycle-grid").innerHTML = "";
@@ -630,10 +532,7 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     $("#sys-badge").textContent = "";
   }
 
-  /* =========================
-     4) UI davranışları
-     ========================= */
-  // Tabs
+  /* ====== UI: Tabs, tarih, dil ====== */
   $$(".tab-btn").forEach(b=>{
     b.addEventListener("click", ()=>{
       $$(".tab-btn").forEach(x=>x.classList.remove("active"));
@@ -644,20 +543,26 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     });
   });
 
-  // Defaults
   const today = new Date();
   const iso = d=> d.toISOString().slice(0,10);
   $("#refdate").value = iso(today);
-
-  // Lang switch
   $("#langSel").addEventListener("change", (e)=> Lang.set(e.target.value));
 
-  /* =========================
-     5) İçerik üretimi
-     ========================= */
+  /* ====== Metin üretimi / kartlar / hesaplar ====== */
+  function longText(n){ const t = Lang.t(); return (t.lbls && t.long && t.long[String(n)]) || ""; }
+  function chaldDiff(n){ const t = Lang.t(); return (t.lbls && t.lbls.chaldDiff && t.lbls.chaldDiff[String(n)]) || ""; }
+
+  function card(title, num, hint, text, chaldNote){
+    const extra = chaldNote ? `<div class="chald-note"><b>${Lang.cur==='tr'?'Chaldean Farkı':'Chaldean Difference'}:</b> ${chaldNote}</div>` : "";
+    return `<div class="card">
+      <div class="row-inline"><span class="k">${num ?? "—"}</span><h3>${title}</h3><span class="badge">${hint||""}</span></div>
+      <div class="long">${text||""}</div>${extra}
+    </div>`;
+  }
+
   function smartSummary({life, expr, soul, pers, bday, matt, py}){
-    const t = Lang.t();
-    const lines=[], tone=t.lbls.smartTone;
+    const t = Lang.t(), tone=t.lbls.smartTone;
+    const lines=[];
     if(life) lines.push(`${t.lbls.life} ${life}: ${tone[life]}.`);
     if(expr) lines.push(`${t.lbls.expr} ${expr}, ${Lang.cur==='tr'?'doğal araç kutun:':'your natural toolkit:'} ${tone[expr]||""}.`);
     if(soul && soul!==expr) lines.push(`${t.lbls.soul} ${soul}, ${Lang.cur==='tr'?'kalbinin istediği:':'what your heart seeks:'} ${tone[soul]||""}.`);
@@ -671,16 +576,6 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
       if(life===7 && (expr===3||expr===5)) lines.push(Lang.cur==='tr'?"Not: 7’nin derinliği, 3/5’in dışa dönüklüğüyle dengelenebilir.":"Note: 7’s depth can be balanced by 3/5’s outward energy.");
     }
     return lines.join(" ");
-  }
-  function longText(n){ const t = Lang.t(); return (t.lbls && t.long && t.long[String(n)]) || ""; }
-  function chaldDiff(n){ const t = Lang.t(); return (t.lbls && t.lbls.chaldDiff && t.lbls.chaldDiff[String(n)]) || ""; }
-
-  function card(title, num, hint, text, chaldNote){
-    const extra = chaldNote ? `<div class="chald-note"><b>${Lang.cur==='tr'?'Chaldean Farkı':'Chaldean Difference'}:</b> ${chaldNote}</div>` : "";
-    return `<div class="card">
-      <div class="row-inline"><span class="k">${num ?? "—"}</span><h3>${title}</h3><span class="badge">${hint||""}</span></div>
-      <div class="long">${text||""}</div>${extra}
-    </div>`;
   }
 
   function calcSingle(){
@@ -696,9 +591,9 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     const outCore = $("#core-grid"), outSup=$("#support-grid"), outCy=$("#cycle-grid"), outLong=$("#long-texts");
     const timelineEl = $("#timeline");
     if(!letters || !dob){
-      outCore.innerHTML = `<div class="card">${t.labels.needNameDob}</div>`;
+      outCore.innerHTML = `<div class="card">${Lang.cur==='tr'?'İsim ve doğum tarihi zorunlu.':'Full name and date of birth are required.'}</div>`;
       outSup.innerHTML = outCy.innerHTML = outLong.innerHTML = timelineEl.innerHTML = "";
-      $("#smart-summary").textContent = t.labels.fillFirst;
+      $("#smart-summary").textContent = Lang.cur==='tr'?'İsim ve doğum tarihi gir, sonra Hesapla.':'Enter full name and date of birth, then press Calculate.';
       return;
     }
 
@@ -732,27 +627,21 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     // Core render
     const chald = sys==="chald";
     const coreCards = [];
-    coreCards.push(card(t.lbls.life, life, t.lbls.coreHintLife, longText(life), chald ? chaldDiff(life) : ""));
-    coreCards.push(card(t.lbls.expr, expr, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, longText(expr), chald ? chaldDiff(expr) : ""));
-    coreCards.push(card(t.lbls.soul, soul, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, longText(soul), chald ? chaldDiff(soul) : ""));
-    coreCards.push(card(t.lbls.pers, pers, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, longText(pers), chald ? chaldDiff(pers) : ""));
-    coreCards.push(card(t.lbls.bday, bday, t.lbls.bdayHint, longText(bday), chald ? chaldDiff(bday) : ""));
-    coreCards.push(card(t.lbls.matt, matt, t.lbls.mattHint, longText(matt), chald ? chaldDiff(matt) : ""));
+    coreCards.push(card(t.lbls.life, life, t.lbls.coreHintLife, longText(life), chald ? t.lbls.chaldDiff?.[life] : ""));
+    coreCards.push(card(t.lbls.expr, expr, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, longText(expr), chald ? t.lbls.chaldDiff?.[expr] : ""));
+    coreCards.push(card(t.lbls.soul, soul, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, longText(soul), chald ? t.lbls.chaldDiff?.[soul] : ""));
+    coreCards.push(card(t.lbls.pers, pers, chald?t.lbls.coreHintExprCh:t.lbls.coreHintExpr, longText(pers), chald ? t.lbls.chaldDiff?.[pers] : ""));
+    coreCards.push(card(t.lbls.bday, bday, t.lbls.bdayHint, longText(bday), chald ? t.lbls.chaldDiff?.[bday] : ""));
+    coreCards.push(card(t.lbls.matt, matt, t.lbls.mattHint, longText(matt), chald ? t.lbls.chaldDiff?.[matt] : ""));
     $("#core-grid").innerHTML = coreCards.join("");
 
     // Support render
-    const LESSON_MEAN = t.lbls.year; // ipucu için kısa sözlük yerine yıl tonlarını kullanarak tooltiplere zenginlik katmıyoruz—zaten metin altı açıklanıyor.
-    const PASSION_MEAN = {1:t.pills[0],2:t.pills[1],3:t.pills[2],4:t.pills[3],5:t.pills[4],6:t.pills[5],7:t.pills[6],8:t.pills[7],9:t.pills[8]};
-    const BALANCE_MEAN = {1:t.pills[0],2:t.pills[1],3:t.pills[2],4:t.pills[3],5:t.pills[4],6:t.pills[5],7:t.pills[6],8:t.pills[7],9:t.pills[8]};
-
     const lesList = lessons.length ? lessons.join(" / ") : "—";
-    const lesMini = lessons.length
-      ? lessons.map(n => `<span class="tip" title="">${n}</span>`).join(" • ")
+    const lesMini = lessons.length ? lessons.map(n => `<span class="tip" title="">${n}</span>`).join(" • ")
       : (chald ? t.supportText.lessonsNoneCh : t.supportText.lessonsNonePy);
 
     const debtList = debts.length ? debts.join(" / ") : "—";
-    const debtBody = debts.length
-      ? t.supportText.debtsHas.replace("{list}", debts.join(", "))
+    const debtBody = debts.length ? t.supportText.debtsHas.replace("{list}", debts.join(", "))
       : t.supportText.debtsNone + (chald && Lang.cur==='tr' ? " <span class='muted'>(Not: Bazı Chaldean ekollerinde 4 ve 8 ‘ders’ kabul edilir.)</span>" : "");
 
     const hpList = hp.nums.length ? hp.nums.join(" / ") : "—";
@@ -762,7 +651,7 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
       : t.supportText.passionNone;
 
     const balNum = (bal ?? "—");
-    const balMini = bal ? t.supportText.balanceMini.replace("{n}", bal).replace("{text}", (BALANCE_MEAN[bal]||"")) : (Lang.cur==='tr'?"Üretilemedi.":"Not available.");
+    const balMini = bal ? t.supportText.balanceMini.replace("{n}", bal).replace("{text}", (t.pills[bal-1]||"")) : (Lang.cur==='tr'?"Üretilemedi.":"Not available.");
 
     $("#support-grid").innerHTML = [
       `<div class="card">
@@ -827,33 +716,31 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
               &nbsp;•&nbsp;
               <span class="tip">${Lang.cur==='tr'?"Mücadele":"Challenge"}: ${c}</span>
             </div>
-            <div class="mini"><b>${Lang.cur==='tr'?"Zirve": "Pinnacle"} ${p}:</b> ${pText} &nbsp;|&nbsp; <b>${Lang.cur==='tr'?"Mücadele": "Challenge"} ${c}:</b> ${cText}</div>
+            <div class="mini"><b>${Lang.cur==='tr'?"Zirve":"Pinnacle"} ${p}:</b> ${pText} &nbsp;|&nbsp; <b>${Lang.cur==='tr'?"Mücadele":"Challenge"} ${c}:</b> ${cText}</div>
           </div>`;
       }).join("");
       $("#timeline").innerHTML = `<div class="timebar">${blocks}</div><div class="time-legend">${t.lbls.timelineLegend}</div>`;
     } else {
-      $("#timeline").innerHTML = "<div class='muted'>"+t.labels.invalidDate+"</div>";
+      $("#timeline").innerHTML = "<div class='muted'>"+(Lang.cur==='tr'?"Geçersiz tarih.":"Invalid date.")+"</div>";
     }
 
-    // Long texts area: show canonical long interpretations for the core numbers user got
+    // Long texts (seçili sayılar)
     const uniques = Array.from(new Set([life, expr, soul, pers, bday, matt].filter(Boolean)));
     $("#long-texts").innerHTML = uniques.map(n=> card(
       (t.pills.find(p=>p.startsWith(String(n)+":")) || String(n)).split(":")[1]?.trim() || (Lang.cur==='tr'?"Sayı":"Number")+" "+n,
       n,
       (Lang.cur==='tr'?"Uzun yorum":"Long interpretation"),
       longText(n),
-      (sys==="chald"? chaldDiff(n) : "")
+      (sys==="chald"? t.lbls.chaldDiff?.[n] : "")
     )).join("");
   }
 
-  const TONE = ()=> Lang.t().lbls.toneCompat;
   function lifeFromDOB(dob){ const {Y,M,D}=dateParts(dob); if(!Y||!M||!D) return null; const raw=String(Y).split('').concat(String(M).split(''),String(D).split('')).map(Number).reduce((a,b)=>a+b,0); return reduceNum(raw); }
   function numberFromName(name, sys, filter){
     const norm = trNorm(name).replace(/\s+/g,''); let s = norm;
     if(filter==='v') s = onlyV(norm); if(filter==='c') s = onlyC(norm);
     if(!s) return 0; return reduceNum(lettersToSum(s, sys));
   }
-
   function calcCompat(){
     const t = Lang.t();
     const aName = $("#nameA").value.trim(), aDOB = $("#dobA").value.trim();
@@ -861,7 +748,7 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     const sys = $("#sys2").value;
 
     if(!aName||!aDOB||!bName||!bDOB){
-      $("#comp-summary").textContent = t.labels.twoNeed;
+      $("#comp-summary").textContent = Lang.cur==='tr'?'İki isim ve iki doğum tarihi gerekli.':'Two names and two birth dates are required.';
       $("#comp-life").innerHTML = "";
       return;
     }
@@ -869,24 +756,37 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
     const A = { life: lifeFromDOB(aDOB), soul: numberFromName(aName, sys, 'v'), pers: numberFromName(aName, sys, 'c') };
     const B = { life: lifeFromDOB(bDOB), soul: numberFromName(bName, sys, 'v'), pers: numberFromName(bName, sys, 'c') };
 
-    let summary = t.compat.summaryDefault;
-    if(A.life && B.life){
-      const pair=(x,y)=> (A.life===x && B.life===y) || (A.life===y && B.life===x);
-      if(pair(1,8)) summary = t.compat.pairNote_1_8;
-      if(pair(4,5)) summary = t.compat.pairNote_4_5;
-      if(pair(2,6)) summary = t.compat.pairNote_2_6;
-    }
+    let summary = Lang.cur==='tr'?'Temel uyum dengeli görünüyor.':'Overall compatibility looks balanced.';
+    const pair=(x,y)=> (A.life===x && B.life===y) || (A.life===y && B.life===x);
+    if(pair(1,8)) summary = Lang.cur==='tr'
+      ? "1 ve 8 kombinasyonu güçlü liderlik sinerjisi getirir... Çözüm: paylaşımcı liderlik ve açık iletişim."
+      : "1 & 8 bring strong leadership synergy... Solution: shared leadership and clear communication.";
+    if(pair(4,5)) summary = Lang.cur==='tr'
+      ? "4 ve 5 kombinasyonu düzen ve özgürlük dersini gündeme taşır... Çözüm: net sınırlar ve ortak tempo."
+      : "4 & 5 ask for structure–freedom balance... Solution: clear boundaries and a shared tempo.";
+    if(pair(2,6)) summary = Lang.cur==='tr'
+      ? "2 ve 6 kombinasyonu uyum ve bakım enerjisini yükseltir... Çözüm: sınırlar ve karşılıklı öz bakım."
+      : "2 & 6 amplify harmony and care... Solution: boundaries and mutual self-care.";
     $("#comp-summary").textContent = summary;
 
     const cards=[];
     if(A.life && B.life){
-      cards.push(`<div class="card"><h3>${t.compLifeTitle}</h3><div class="long">${t.compat.lifeBlock.replace("{A}",A.life).replace("{B}",B.life)}</div></div>`);
+      const block = Lang.cur==='tr'
+        ? `Senin yaşam yolun <b>${A.life}</b>, onun yaşam yolu ise <b>${B.life}</b>. Bu sayı, hayatın temel dersini ve ana yönünü temsil eder. Farklı temalar size farklı pencereler açar; doğru yönetildiğinde tamamlayıcı denge oluşturur.`
+        : `Your Life Path is <b>${A.life}</b>, theirs is <b>${B.life}</b>. This shows the core lesson and direction. Differences can complement if managed well.`;
+      cards.push(`<div class="card"><h3>${t.compLifeTitle}</h3><div class="long">${block}</div></div>`);
     }
     if(A.soul && B.soul){
-      cards.push(`<div class="card"><h3>${Lang.cur==='tr'?'Ruh Dürtüsü Uyumları':'Soul Urge Compatibility'}</h3><div class="long">${t.compat.soulBlock.replace("{A}",A.soul).replace("{B}",B.soul)}</div></div>`);
+      const block = Lang.cur==='tr'
+        ? `Senin ruh dürtün <b>${A.soul}</b>, onun ruh dürtüsü <b>${B.soul}</b>. Farklıysa, tarafların ihtiyacını anlamak kritik; benzerse akış kolaylaşır.`
+        : `Your Soul Urge is <b>${A.soul}</b>, theirs is <b>${B.soul}</b>. If very different, understand each other’s needs; if similar, flow is easier.`;
+      cards.push(`<div class="card"><h3>${Lang.cur==='tr'?'Ruh Dürtüsü Uyumları':'Soul Urge Compatibility'}</h3><div class="long">${block}</div></div>`);
     }
     if(A.pers && B.pers){
-      cards.push(`<div class="card"><h3>${Lang.cur==='tr'?'Kişilik (Dış İmaj) Uyumları':'Personality (Outer Image) Compatibility'}</h3><div class="long">${t.compat.persBlock.replace("{A}",A.pers).replace("{B}",B.pers)}</div></div>`);
+      const block = Lang.cur==='tr'
+        ? `Senin kişilik sayın <b>${A.pers}</b>, onun kişilik sayısı <b>${B.pers}</b>. Kontrast çekici olabilir; uzun vadede sürtüşmeye dönebilir—doğru kullanılırsa tamamlar.`
+        : `Your Personality number is <b>${A.pers}</b>, theirs is <b>${B.pers}</b>. Contrast can attract yet rub over time—use it to complement.`;
+      cards.push(`<div class="card"><h3>${Lang.cur==='tr'?'Kişilik (Dış İmaj) Uyumları':'Personality (Outer Image) Compatibility'}</h3><div class="long">${block}</div></div>`);
     }
     $("#comp-life").innerHTML = cards.join("");
   }
@@ -895,7 +795,6 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
   $("#calc").addEventListener("click", calcSingle);
   $("#print").addEventListener("click", ()=> window.print());
   $("#copy").addEventListener("click", ()=>{
-    const t = Lang.t();
     const nameRaw = $("#name").value.trim();
     const dob = $("#dob").value.trim();
     const ref = $("#refdate").value.trim();
@@ -910,7 +809,9 @@ From birth date we compute Life Path/Birthday; from the name we compute Expressi
   });
   $("#calc2").addEventListener("click", calcCompat);
 
-  // İlk dil kurulum
+  // İlk kurulum
+  const today = new Date(); const iso = d=> d.toISOString().slice(0,10);
+  $("#refdate").value = iso(today);
   Lang.set('tr');
 })();
 </script>
