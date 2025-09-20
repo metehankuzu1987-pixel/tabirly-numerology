@@ -1,4 +1,4 @@
-<!-- Tabirly • Numeroloji / Numerology — v4.6  (Bilingual, Info tab 100% fixed, no dotted IDs) -->
+<!-- Tabirly • Numeroloji / Numerology — v4.7  (Dual-language, fixed Info tab, fixed labels, full long texts, master numbers in summary) -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
 <style>
 :root{
@@ -48,7 +48,7 @@ button.sec{background:linear-gradient(180deg,#FFF,var(--card-alt));color:var(--t
 .k{display:inline-block;min-width:28px;height:28px;line-height:28px;text-align:center;border-radius:8px;background:color-mix(in srgb,var(--p1) 12%, white);border:1px solid var(--border);font-weight:800;margin-right:8px;color:#161616}
 .badge{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid var(--border);font-size:.78rem;color:#2d3138;background:#fff}
 .row-inline{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:4px 0}
-.muted{font-size:.92rem;color:var(--muted)}
+.muted{font-size:.92rem;color:#4A4F57}
 .long{font-size:.95rem;line-height:1.6;color:#141517}
 details{background:var(--card-alt);border:1px dashed var(--border);border-radius:12px;padding:10px;margin:8px 0}
 summary{cursor:pointer;font-weight:700;color:#141517}
@@ -184,10 +184,10 @@ summary{cursor:pointer;font-weight:700;color:#141517}
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-  const $ = (s)=>document.querySelector(s);
+  const $  = (s)=>document.querySelector(s);
   const $$ = (s)=>document.querySelectorAll(s);
 
-  /* ========= I18N (no dotted IDs; using data-i18n attributes) ========= */
+  /* =================== I18N =================== */
   const I18N = {
     tr:{
       title:"Tabirly • Numeroloji Falı", langLabel:"Dil",
@@ -225,13 +225,13 @@ Doğum tarihinden Yaşam Yolu & Doğum Günü; isimden İfade, Ruh Dürtüsü, K
       namePH:"Örn: Metehan Kuzu", nameAPH:"Kişi A", nameBPH:"Kişi B",
       dobHint:"Biçim: gg/aa/yyyy", refHint:"Biçim: gg/aa/yyyy", aDobHint:"Biçim: gg/aa/yyyy", bDobHint:"Biçim: gg/aa/yyyy",
 
-      // UI texts used later
+      /* UI feedback */
       needBoth:"İsim ve doğum tarihi zorunlu.",
       enterFirst:"İsim ve doğum tarihi gir, sonra Hesapla.",
       lessonsT:"Karmik Dersler", lessonsB:"Eksik enerji",
       lessonsLong:"Bu alanlar bilinçli pratikle güçlenir.",
       debtT:"Karmik Borç", debtNoneMini:"Borç yok", debtYesMini:"Borç görünüyor",
-      debtNoneLong:"Karmik borç sayısı bulunmadı.", debtYesLong:"Karmic borç sayıları: ",
+      debtNoneLong:"Karmik borç sayısı bulunmadı.", debtYesLong:"Karmik borç sayıları: ",
       hiddenT:"Gizli Tutku", hiddenBadge:"Baskın harf(ler)",
       hiddenNone:"Gizli Tutku saptanamadı (isim verisi yetersiz).",
       hiddenLong:"Baskın titreşimler doğal yönelim oluşturur; bilinçli kullanırsan ivme sağlar.",
@@ -288,7 +288,8 @@ From birth date: Life Path & Birthday; from the name: Expression, Soul Urge, Per
       debtT:"Karmic Debt", debtNoneMini:"No debt", debtYesMini:"Debt detected",
       debtNoneLong:"No karmic debt number detected.", debtYesLong:"Karmic debt numbers: ",
       hiddenT:"Hidden Passion", hiddenBadge:"Dominant letter(s)",
-      hiddenNone:"Hidden Passion not detected.", hiddenLong:"Dominant vibrations shape natural drive; used consciously, they give momentum.",
+      hiddenNone:"Hidden Passion not detected.",
+      hiddenLong:"Dominant vibrations shape natural drive; used consciously, they give momentum.",
       balanceT:"Balance", balanceBadge:"Crisis mode",
       balanceNoneMini:"Not available.", balanceNoneLong:"Computed from name; check your full name entry.", balanceLong:"In stress this strategy helps; avoid excess.",
       year:"Personal Year", month:"Personal Month", day:"Personal Day",
@@ -301,32 +302,25 @@ From birth date: Life Path & Birthday; from the name: Expression, Soul Urge, Per
   };
 
   function applyI18N(lang){
-    // textContent
     document.querySelectorAll('[data-i18n]').forEach(el=>{
-      const k = el.getAttribute('data-i18n'); if(k && I18N[lang][k]!=null) el.textContent = I18N[lang][k];
+      const k=el.getAttribute('data-i18n'); if(k in I18N[lang]) el.textContent=I18N[lang][k];
     });
-    // innerHTML
     document.querySelectorAll('[data-i18n-html]').forEach(el=>{
-      const k = el.getAttribute('data-i18n-html'); if(k && I18N[lang][k]!=null) el.innerHTML = I18N[lang][k];
+      const k=el.getAttribute('data-i18n-html'); if(k in I18N[lang]) el.innerHTML=I18N[lang][k];
     });
-    // placeholders
     document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
-      const k = el.getAttribute('data-i18n-ph'); if(k && I18N[lang][k]!=null) el.placeholder = I18N[lang][k];
+      const k=el.getAttribute('data-i18n-ph'); if(k in I18N[lang]) el.placeholder=I18N[lang][k];
     });
-    // hints
-    document.querySelectorAll('.hint[data-i18n]').forEach(el=>{
-      const k = el.getAttribute('data-i18n'); if(k && I18N[lang][k]!=null) el.textContent = I18N[lang][k];
-    });
-    // Pills
-    const pills = (lang==='tr'
+    // Pills (quick guide)
+    const pills=(lang==='tr'
       ? ["1: Liderlik","2: Uyum","3: İfade","4: Düzen","5: Özgürlük","6: Sorumluluk","7: Bilgelik","8: Güç","9: Hizmet","11: İlham","22: İnşa","33: Şifa"]
       : ["1: Leadership","2: Harmony","3: Expression","4: Order","5: Freedom","6: Responsibility","7: Wisdom","8: Power","9: Service","11: Inspiration","22: Building","33: Healing"]);
-    const pillsEl = $('#quickPills'); if(pillsEl) pillsEl.innerHTML = pills.map(x=>`<span class="pill">${x}</span>`).join('');
+    $('#quickPills').innerHTML=pills.map(x=>`<span class="pill">${x}</span>`).join('');
     // date input locale hint
     document.querySelectorAll('input[type="date"]').forEach(d=>d.setAttribute('lang',lang));
   }
 
-  /* ========= Numerology Engine ========= */
+  /* =================== Engine =================== */
   const MAP_PYTH={a:1,b:2,c:3,d:4,e:5,f:6,g:7,h:8,i:9,j:1,k:2,l:3,m:4,n:5,o:6,p:7,q:8,r:9,s:1,t:2,u:3,v:4,w:5,x:6,y:7,z:8};
   const MAP_CHALD={a:1,i:1,j:1,q:1,y:1,b:2,k:2,r:2,c:3,g:3,l:3,s:3,d:4,m:4,t:4,e:5,h:5,n:5,x:5,u:6,v:6,w:6,o:7,z:7,f:8,p:8};
   const isMaster = n => [11,22,33].includes(n);
@@ -340,32 +334,30 @@ From birth date: Life Path & Birthday; from the name: Expression, Soul Urge, Per
   const onlyV = s => s.replace(/[^aeiouy]/g,'');
   const onlyC = s => s.replace(/[aeiouy]/g,'');
 
-  const today = new Date();
-  const iso = d=> d.toISOString().slice(0,10);
-  $('#refdate').value = iso(today);
+  const today=new Date(); const iso=d=>d.toISOString().slice(0,10); $('#refdate').value=iso(today);
 
   function lettersToSum(letters, sys){ const map=sys==="chald"?MAP_CHALD:MAP_PYTH; let tot=0; for(const ch of letters){ tot+=(map[ch]||0); } return tot; }
   function dateParts(yyyy_mm_dd){ if(!yyyy_mm_dd) return {}; const [Y,M,D]= yyyy_mm_dd.split("-").map(Number); return {Y,M,D}; }
   function karmicLessons(letters, sys){
-    const map = sys==="chald" ? MAP_CHALD : MAP_PYTH;
-    const present = new Set([...letters].map(ch=>map[ch]).filter(Boolean));
-    const missing = []; for(let i=1;i<=9;i++){ if(sys==="chald" && i===9) continue; if(!present.has(i)) missing.push(i); }
+    const map=sys==="chald"?MAP_CHALD:MAP_PYTH;
+    const present=new Set([...letters].map(ch=>map[ch]).filter(Boolean));
+    const missing=[]; for(let i=1;i<=9;i++){ if(sys==="chald"&&i===9) continue; if(!present.has(i)) missing.push(i); }
     return missing;
   }
   function hiddenPassion(letters, sys){
     if(!letters) return {nums:[],letters:[]};
-    const map = sys==="chald" ? MAP_CHALD : MAP_PYTH;
+    const map=sys==="chald"?MAP_CHALD:MAP_PYTH;
     const freq={}; for(const ch of letters){ freq[ch]=(freq[ch]||0)+1; }
-    const max = Math.max(...Object.values(freq));
-    const lettersTop = Object.keys(freq).filter(k=>freq[k]===max);
-    const nums = Array.from(new Set(lettersTop.map(l=>map[l]).filter(Boolean))).sort((a,b)=>a-b);
-    return {nums, letters: lettersTop};
+    const max=Math.max(...Object.values(freq));
+    const lettersTop=Object.keys(freq).filter(k=>freq[k]===max);
+    const nums=Array.from(new Set(lettersTop.map(l=>map[l]).filter(Boolean))).sort((a,b)=>a-b);
+    return {nums,letters:lettersTop};
   }
   function balanceNumber(nameNorm, sys){
-    const map = sys==="chald" ? MAP_CHALD : MAP_PYTH;
-    const firsts = nameNorm.trim().split(/\s+/).map(w=>w[0]).filter(Boolean);
+    const map=sys==="chald"?MAP_CHALD:MAP_PYTH;
+    const firsts=nameNorm.trim().split(/\s+/).map(w=>w[0]).filter(Boolean);
     if(firsts.length===0) return null;
-    const total = firsts.reduce((a,ch)=>a+(map[ch]||0),0);
+    const total=firsts.reduce((a,ch)=>a+(map[ch]||0),0);
     return reduceNum(total);
   }
   function personalYear(dob, ref){ const {M:bm,D:bd}=dateParts(dob); const {Y:ry}=dateParts(ref); if(!bm||!bd||!ry) return null; const total=sumDigits(bm)+sumDigits(bd)+sumDigits(ry); return reduceNum(total); }
@@ -373,7 +365,7 @@ From birth date: Life Path & Birthday; from the name: Expression, Soul Urge, Per
   function personalDay(pm, ref){ const {D}=dateParts(ref); if(!pm||!D) return null; return reduceNum(pm + sumDigits(D)); }
   function detectDebts({lifeRaw,exprRaw,day}){ const set=new Set(); [lifeRaw,exprRaw,day].forEach(v=>{ if([13,14,16,19].includes(v)) set.add(v); }); return Array.from(set).sort((a,b)=>a-b); }
   function pinnaclesAndChallenges(dob){
-    const {Y,M,D} = dateParts(dob); if(!Y||!M||!D) return null;
+    const {Y,M,D}=dateParts(dob); if(!Y||!M||!D) return null;
     const r=n=>reduceNum(n);
     const rm=r(sumDigits(M)), rd=r(sumDigits(D)), ry=r(sumDigits(Y));
     const P1=r(rm+rd), P2=r(rd+ry), P3=r(P1+P2), P4=r(rm+ry);
@@ -381,18 +373,16 @@ From birth date: Life Path & Birthday; from the name: Expression, Soul Urge, Per
     return {spans:[{label:"0–36",P:P1,C:C1},{label:"37–45",P:P2,C:C2},{label:"46–54",P:P3,C:C3},{label:"55+",P:P4,C:C4}]};
   }
 
-  const Lang = {
-    cur:'tr',
-    set(l){ this.cur=l; document.documentElement.setAttribute('lang',l); document.querySelectorAll('input[type="date"]').forEach(d=>d.setAttribute('lang',l)); applyI18N(l); }
-  };
+  const Lang = { cur:'tr', set(l){ this.cur=l; document.documentElement.setAttribute('lang',l); applyI18N(l); } };
 
+  /* Smart Summary tone FIX: include 11/22/33 */
   function smartSummary({life,expr,soul,pers,bday,matt,py}){
     const L = Lang.cur==='tr'
       ? {lp:"Yaşam Yolu",ex:"İfade",su:"Ruh Dürtüsü",pe:"Kişilik",bd:"Doğum Günü",ma:"Olgunluk",yr:"Bu yıl (Kişisel Yıl "}
       : {lp:"Life Path",ex:"Expression",su:"Soul Urge",pe:"Personality",bd:"Birthday",ma:"Maturity",yr:"This year (Personal Year "};
     const tone = Lang.cur==='tr'
-      ? {1:"liderlik, yeni başlangıçlar",2:"uyum, işbirliği, sabır",3:"ifade, yaratıcılık, görünürlük",4:"düzen, emek, yapı kurma",5:"değişim, özgürlük, keşif",6:"sorumluluk, bakım, kalite",7:"analiz, içgörü, maneviyat",8:"güç, sonuç, yönetim",9:"tamamlama, şefkat, hizmet"}
-      : {1:"leadership, fresh starts",2:"harmony, cooperation, patience",3:"expression, creativity, visibility",4:"structure, work, building",5:"change, freedom, exploration",6:"responsibility, care, quality",7:"analysis, insight, spirituality",8:"power, results, management",9:"completion, compassion, service"};
+      ? {1:"liderlik, yeni başlangıçlar",2:"uyum, işbirliği, sabır",3:"ifade, yaratıcılık, görünürlük",4:"düzen, emek, yapı kurma",5:"değişim, özgürlük, keşif",6:"sorumluluk, bakım, kalite",7:"analiz, içgörü, maneviyat",8:"güç, sonuç, yönetim",9:"tamamlama, şefkat, hizmet",11:"ilham, vizyon",22:"büyük inşa, strateji",33:"şifa, öğreticilik"}
+      : {1:"leadership, fresh starts",2:"harmony, cooperation, patience",3:"expression, creativity, visibility",4:"structure, work, building",5:"change, freedom, exploration",6:"responsibility, care, quality",7:"analysis, insight, spirituality",8:"power, results, management",9:"completion, compassion, service",11:"inspiration, vision",22:"master building, strategy",33:"healing, teaching"};
     const yearTxt = Lang.cur==='tr'
       ? {1:"Yeni başlangıçlar",2:"İşbirliği",3:"İfade",4:"Düzen",5:"Değişim",6:"Sorumluluk",7:"İçe dönüş",8:"Güç",9:"Tamamlama"}
       : {1:"New beginnings",2:"Cooperation",3:"Expression",4:"Structure",5:"Change",6:"Responsibility",7:"Introspection",8:"Power",9:"Closure"};
@@ -407,29 +397,35 @@ From birth date: Life Path & Birthday; from the name: Expression, Soul Urge, Per
     return lines.join(" ");
   }
 
-  // Long texts (TR full, EN compact but clear to keep file size sane)
+  /* Uzun yorumlar — TR tam, EN detaylı */
   const LONG = {
     tr:{
-"1":"1 sayısı bağımsızlık, başlangıç ve öncülük enerjisidir... (uzun açıklama yukarıdaki sürümdeydi; aynı içerik korunur)",
-"2":"2 sayısı uyum, işbirliği ve diplomasi titreşimidir...","3":"3 sayısı ifade, yaratıcılık ve neşe akışıdır...",
-"4":"4 sayısı emek, düzen ve yapı kurmadır...","5":"5 sayısı özgürlük, değişim ve keşiftir...",
-"6":"6 sayısı sevgi, bakım ve sorumluluk frekansıdır...","7":"7 sayısı içgörü, analiz ve manevi derinliktir...",
-"8":"8 sayısı güç, yönetim ve maddi ustalıktır...","9":"9 sayısı idealizm, şefkat ve tamamlanmadır...",
-"11":"11 sezgi, ilham ve vizyonun ustalığıdır...","22":"22 “Usta İnşacı”dır...","33":"33 “Usta Öğretmen/Şifacı”dır..."
+"1":"1 sayısı bağımsızlık, başlangıç ve öncülük enerjisidir. Bu titreşimi taşıyan kişi doğal olarak inisiyatif alma, risk görüp karar verme ve yeni yollar açma eğilimindedir. İşte veya kişisel projelerde sahiplenme duygusu yüksektir; bir fırsat doğduğunda beklemek yerine harekete geçer. Çocukluk ya da gençlik yıllarında “kendi başıma yapmalıyım” teması sık görülür; bu kimi zaman yalnızlık hissi yaratabilir. 1’in ışığı cesaret ve ilhamdır: çevresine “yapılabilir” duygusu aşılar. Gölgesi kibir, acelecilik ve başkalarının fikirlerine kapanmadır. Sağlıklı 1, liderliği tek başınalıkla karıştırmaz; yetki devreder, dinler ve fikir toplar. Günlük hayatta 1 titreşimini dengelemek için sporla enerjiyi boşaltmak, kısa hedef listeleriyle odağı netleştirmek ve “geri bildirim saati” gibi küçük ritüeller kurmak faydalıdır. 1, vizyonu gerçekle buluşturduğunda motor güç olur; aksadığında ise “ben yaparım” inadı ilişkilere zarar verebilir.",
+"2":"2 sayısı uyum, işbirliği ve diplomasi titreşimidir. Bu enerjiye sahip olan kişi arabuluculuk, köprü kurma ve duygusal zekâyla karmaşayı yumuşatma becerisine sahiptir. İnsanların ne hissettiğini hızlıca sezebilir; ekiplerin içinde güven veren yapıştırıcı rolü oynar. Işığı empati, sabır ve rafine zarafettir. Gölgesi kararsızlık, çekingenlik ve aşırı onay arayışıdır; bazen kendi ihtiyaçlarını erteleyebilir. 2 titreşimi güçlü olan biri için “sınır belirleme” sanatı hayat boyu önemli bir derstir. Günlük örnek: yoğun bir toplantıda tansiyon yükseldiğinde, 2 enerjisi doğru kelimeleri seçip ortamı sakinleştirir; fakat bunu yaparken kendi görüşünü söylemeyi de unutmamalıdır. İlişkilerde sadakat ve duyarlılık yüksektir; küçük jestler, özenli iletişim ve ritim duygusu mutluluğu artırır. Meditasyon, nefes ve yavaş sporlar bu sayıyı dengeler. 2’nin olgun hali, yumuşak gücüyle büyük değişimleri mümkün kılar.",
+"3":"3 sayısı ifade, yaratıcılık ve neşe akışıdır. Kelimeler, ses, renk ve ritim 3’ün doğal alanıdır; yazmak, konuşmak, sahne almak, görsel üretmek bu titreşimle kolaylaşır. Işığı esin ve sosyalliktir; bir toplantıyı canlandırır, zor konuyu hikâyeye dönüştürür. Gölgesi yüzeysellik, dağınıklık ve ertelemedir; espriyle konuyu dağıtma eğilimi görülebilir. 3, disiplinle birleştiğinde üretken bir sanatçıya, etkileyici bir öğretmene ya da topluluk önünde güvenle konuşan bir lidere dönüşür. Günlük hayatta içerik üretim blokları (ör. 25 dakikalık odak), küçük yayın takvimleri ve “taslak bırak, dön” kuralı 3’ün verimini artırır. İlişkilerde oyuncu ve sıcak bir enerji getirir; ancak duyguları hafife alma riski taşır. Duygusal açıklık egzersizleri, 3’ün samimiyetini derinleştirir. 3, neşeyi stratejiyle birleştirdiğinde, çevresine bulaşan bir momentum yaratır.",
+"4":"4 sayısı emek, düzen ve yapı kurmadır. Sabırla adım adım ilerlemek, sistem kurmak ve sürdürülebilir sonuç üretmek 4’ün uzmanlığıdır. Işığı güvenilirlik ve dayanıklılıktır; zorlu projeleri sırtlar, süreçleri netleştirir. Gölgesi katılık, esneksizlik ve ayrıntıya takılıp büyük resmi kaçırmaktır. 4’ün gelişimi için “plan + esneklik” bileşimi kritik: takvim blokları ve kontrol listeleri iyi, fakat beklenmeyen fırsata yer açan pay da şart. Örnek: finans, hukuk, inşaat, veri operasyonu gibi alanlarda 4 enerjisi parıldar. İlişkilerde sorumluluk duygusu yüksektir; güven temelli bir bağ arar. Bedenlenmiş disiplin (düzenli uyku, yürüyüş) enerji kalitesini yükseltir. 4, hayalleri zemine çiviler; fakat zaman zaman yaratıcı molalar almazsa tükenmeye yaklaşabilir. Ritmik çalış, küçük kazanımları kutla, “niçin”ini görünür tut: 4 böylece sağlam köprüler kurar.",
+"5":"5 sayısı özgürlük, değişim ve keşiftir. Merak, hareket ve deneyim odaklı öğrenme 5’in doğasıdır. Işığı esneklik, cesaret ve adaptasyondur; yeni şehirler, yeni beceriler, çok yönlü kariyerler bu titreşimle uyumludur. Gölgesi sabırsızlık, yüzeysellik ve taahhüt korkusudur; “hep bir şey kaçırıyorum” duygusu da görülebilir. 5 enerjisi, mikro disiplinle devleşir: 90 dakikalık derin çalışma, sonra keşif; 30 gün minik alışkanlık; “bir gir, bir derinleştir” kuralı. İlişkilerde alan ihtiyacı belirgindir; açık iletişim ve sınırlar özgürlükle bağlılığı dengeleyebilir. Seyahat, dil öğrenme, sahada satış/araştırma, medya üretimi 5’e uyar. 5, hareketi anlamla buluşturduğunda, değişimi yöneten bir kaşife dönüşür; aksi halde dağılma hissi artar. Seçici ol, az şeyi derin yap, kalanı deneyim alanına bırak.",
+"6":"6 sayısı sevgi, bakım ve sorumluluk frekansıdır. Aile, ekip ve topluluk bağlarını onarma eğilimi vardır; estetik ve mekân iyileştirme (dekorasyon, ses, ışık) de 6’nın alanına girer. Işığı şefkat, sahiplenme ve hizmettir. Gölgesi aşırı yüklenme, kontrolcülük ve “herkesi kurtarma” şemasıdır. 6’nın sağlıklı hali, önce oksijen maskesini kendine takar: öz bakım, sınır ve delege. Meslekte eğitim, sağlık, danışmanlık, tasarım ve toplum hizmetleri öne çıkar. İlişkilerde derin bağlılık sunar; küçük ritüeller (ortak akşam, ekran-sız sohbet) güveni büyütür. 6, kalite ve sıcaklık kattığında çevresinde sığınak hissi yaratır; fakat kendi ihtiyaçlarını yok sayarsa kırgınlık birikir. Denge: “evet” kadar “hayır” deme pratiği, haftalık bakım randevuları ve minik güzelleştirmeler.",
+"7":"7 sayısı içgörü, analiz ve manevi derinliktir. Yüzeysel cevaplar tatmin etmez; veri, teori ve sezgi birlikte çalışır. Işığı bilgelik ve özgün içgörüdür; bilim, felsefe, ar-ge, veri analitiği, psikoloji ve ruhsal çalışmalar 7’ye uygundur. Gölgesi izolasyon, kuşku ve eleştirelliğin sertleşmesidir. 7 için “yalnızlık + topluluk” dengesi altındır: derin çalışma blokları, ardından kısa paylaşım. Duyguları zihne tercüme etmek yerine, bedensel farkındalık (yürüyüş, nefes) denge sağlar. İlişkilerde seçicidir; az ama derin bağ ister. 7’nin olgun hali, hakikati ararken alçakgönüllüdür: bilmediğini kabul eder, araştırır, sentezler ve paylaşır. Böylece kuru teoriden çıkıp dönüştürücü bir rehbere evrilir.",
+"8":"8 sayısı güç, yönetim ve maddi ustalıktır. Kaynak toplama, sistem kurma ve sonuç üretme 8’in uzmanlığıdır. Işığı vizyon ve icradır; girişimcilik, finans, operasyon ve liderlik rollerinde parlar. Gölgesi kontrol takıntısı, aşırı rekabet ve duygulardan kopuştur. 8, değer üretirken etik ve uzun vadeyi odağa aldığında kalıcı etki yaratır. Parayla sağlıklı ilişki (bütçe, yatırım, hayır) gücü rafine eder. İlişkilerde saygı ve netlik arar; duygu dilini öğrenmek 8’i yumuşatır. Beden pratiği ve sınırları net takvimler, “hayat tasarımı”na güç katar. 8, vizyonu toplumsal faydayla buluşturduğunda gerçek zafer gelir.",
+"9":"9 sayısı idealizm, şefkat ve tamamlanmadır. Evrensel değerlere yönelme, öğretme ve sanatla iyileştirme 9’un doğasında vardır. Işığı cömertlik ve bilgeliktir; gölgesi hayal kırıklığı ve tükenmiş fedakârlıktır. 9’un dersi: sınırları olan merhamet. İleri yaşlarda paylaşım ve hizmet teması güçlenir; mentorluk, sosyal etki projeleri, sanatla topluma seslenmek tatmin verir. Günlük yaşamda “küçük vedalar” (fazlalığı bırakmak) 9’un hafiflemesine yardım eder. Tamamlanma döngülerinde yas ve şükran birlikte tutulduğunda 9, yeniye yer açar.",
+"11":"11 sezgi, ilham ve vizyonun ustalığıdır. 2’nin uyumunu taşırken üst frekansta bir farkındalık ekler. Erken yaşlardan itibaren başkalarının göremediğini hissetme, eşzamanlılıkları fark etme ve sanatsal/ruhsal ifade görülebilir. Işığı başkalarına yol gösteren ilhamdır; gölgesi aşırı hassasiyet, kaygı ve amaç baskısıdır. 11, enerjisini bedene indirip disipline ettiğinde öğretmen/rehber olur: ilhamı somut üretime çevirir (eser, program, hareket). Ritüel, meditasyon ve topraklayıcı rutinler denge sağlar. 11’in hediyesi, kolektif sezgiyi kelimeye ve esere dönüştürmesidir.",
+"22":"22 “Usta İnşacı”dır. 4’ün düzenine dev vizyon ekler; hayali gerçeğe çiviler. Topluma fayda sağlayan kalıcı yapılar kurma eğilimi yüksektir (vakıf, kampüs, şehir ölçekte projeler). Işığı: vizyonu somutlaştırmak. Gölgesi: sorumluluk baskısı, katılık veya vizyon karşısında geri çekilmek. 22, strateji + takım + zaman ufkuyla çalıştığında tarihe iz bırakır. Kişisel bakım ve delege, bu titreşimin yan etkilerini (aşırı yük) dengeler.",
+"33":"33 “Usta Öğretmen/Şifacı”dır. 6’nın şefkatini yüksek bilince taşır; ilhamı somut bakım ve öğrenmeye dönüştürür. Öğretme, danışmanlık, sanatla şifa ve manevi rehberlik alanları 33’e uygundur. Işığı koşulsuz sevgi ve topluluk iyileştirmesidir; gölgesi kendini unutmak ve tükenmişliktir. 33, sınır ve öz bakım öğrenildiğinde, geniş kitlelere dokunan bir iyileştirici etki yaratır; sevgiyi yapı ve yöntemle sürdürülebilir kılar."
     },
     en:{
-"1":"No.1 = independence and initiative. Light: courage, starting things; Shadow: arrogance, impatience. Balance by listening, delegating, and short focused goal lists.",
-"2":"No.2 = harmony and diplomacy. Light: empathy, patience; Shadow: over-pleasing, weak boundaries. Practice saying no and set clear limits.",
-"3":"No.3 = expression and creativity. Light: humor, story; Shadow: scatter and procrastination. Add discipline via short content sprints.",
-"4":"No.4 = structure and work. Light: reliability; Shadow: rigidity. Keep plans but leave space for flexibility.",
-"5":"No.5 = freedom and change. Light: adaptability; Shadow: restlessness. Use micro-disciplines and selective focus.",
-"6":"No.6 = care and responsibility. Light: devotion; Shadow: over-rescuing. Boundaries + self-care first.",
-"7":"No.7 = insight and analysis. Light: wisdom; Shadow: isolation and overthinking. Pair deep work with brief sharing.",
-"8":"No.8 = power and results. Light: execution; Shadow: control. Tie ambition to ethics and long-term value.",
-"9":"No.9 = compassion and completion. Light: generosity; Shadow: exhausted sacrifice. Practice “boundaried kindness.”",
-"11":"No.11 = inspiration and vision. Ground sensitivity with routine and embodiment.",
-"22":"No.22 = master builder. Add team, timeline, and delegation to hold scale.",
-"33":"No.33 = master teacher/healer. Love with methods; avoid burnout via limits."
+"1":"1 = independence and initiative. Light: courage to start and inspire; Shadow: arrogance and impatience. Balance by listening, delegating, and tight focus lists.",
+"2":"2 = harmony, diplomacy, bridge-building. Light: empathy, patience; Shadow: indecision and weak boundaries. Practice saying no and set limits.",
+"3":"3 = expression and creative flow. Light: story and humor; Shadow: scatter and procrastination. Pair creativity with short disciplined sprints.",
+"4":"4 = structure and work. Light: reliability, stamina; Shadow: rigidity and missing the big picture. Keep plans but reserve slack for surprises.",
+"5":"5 = freedom and change. Light: adaptability; Shadow: restlessness and FOMO. Use micro-disciplines and selective depth.",
+"6":"6 = care, responsibility, quality. Light: devotion; Shadow: over-rescuing. Boundaries and self-care first, then service.",
+"7":"7 = insight, analysis, spirituality. Light: wisdom; Shadow: isolation and overthinking. Alternate deep work with brief sharing.",
+"8":"8 = power, management, results. Light: execution; Shadow: control and over-competition. Tie ambition to ethics and long-term value.",
+"9":"9 = compassion, ideals, completion. Light: generosity; Shadow: exhausted sacrifice. Practice boundaried kindness and conscious closure.",
+"11":"11 = inspiration and vision at a master level. Ground sensitivity via routine and embodiment; turn vision into artifacts.",
+"22":"22 = master builder. Add team, timeline, and delegation to hold scale; build structures that last and serve.",
+"33":"33 = master teacher/healer. Love with methods; teach and heal at scale while avoiding burnout through limits."
     }
   };
 
@@ -506,8 +502,8 @@ From birth date: Life Path & Birthday; from the name: Expression, Soul Urge, Per
       `<div class="card"><div class="row-inline"><span class="k">${bal ?? "—"}</span><h3>${t.balanceT}</h3><span class="badge">${t.balanceBadge}</span></div><div class="mini">${bal? bal : t.balanceNoneMini}</div><div class="long">${bal? t.balanceLong : t.balanceNoneLong}</div></div>`
     ].join("");
 
-    const yearTxt = {tr:{1:"Yeni başlangıçlar…",2:"İşbirliği…",3:"İfade…",4:"Düzen…",5:"Değişim…",6:"Sorumluluk…",7:"İçe dönüş…",8:"Güç…",9:"Tamamlama…"},
-                     en:{1:"New beginnings…",2:"Cooperation…",3:"Expression…",4:"Structure…",5:"Change…",6:"Responsibility…",7:"Introspection…",8:"Power…",9:"Closure…"}}[Lang.cur];
+    const yearTxt = {tr:{1:"Yeni başlangıçlar, cesur adımlar.",2:"İşbirliği, sabır.",3:"İfade, yaratıcılık.",4:"Düzen ve temel.",5:"Değişim ve keşif.",6:"Sorumluluk ve kalite.",7:"İçe dönüş ve analiz.",8:"Güç ve sonuç.",9:"Tamamlama ve bırakış."},
+                     en:{1:"New beginnings, bold steps.",2:"Cooperation and patience.",3:"Expression and creativity.",4:"Structure and foundations.",5:"Change and exploration.",6:"Responsibility and quality.",7:"Introspection and analysis.",8:"Power and results.",9:"Completion and release."}}[Lang.cur];
 
     outCy.innerHTML = [
       `<div class="card"><div class="row-inline"><span class="k">${py ?? "—"}</span><h3>${t.year}</h3><span class="badge">${ref||""}</span></div><div class="mini">${py ? (t.theme + (yearTxt[py]||"")) : "—"}</div><div class="long">${py ? t.ground : t.checkDates}</div></div>`,
@@ -572,12 +568,11 @@ From birth date: Life Path & Birthday; from the name: Expression, Soul Urge, Per
     b.addEventListener('click', ()=>{
       $$('.tab-btn').forEach(x=>{x.classList.remove('active'); x.setAttribute('aria-selected','false');});
       b.classList.add('active'); b.setAttribute('aria-selected','true');
-      const tab=b.dataset.tab; $$('.panel').forEach(p=>p.classList.remove('active')); const tgt=$('#panel-'+tab); if(tgt){tgt.classList.add('active');}
-      if(tab==='bilgi'){ /* nothing special now; content already bound via data-i18n */ }
+      const tab=b.dataset.tab; $$('.panel').forEach(p=>p.classList.remove('active')); const tgt=$('#panel-'+tab); if(tgt) tgt.classList.add('active');
     });
   });
 
-  // Language
+  // Language switch
   $('#langSel').addEventListener('change', e=> Lang.set(e.target.value));
 
   // Buttons
@@ -597,6 +592,6 @@ From birth date: Life Path & Birthday; from the name: Expression, Soul Urge, Per
 
   // Init
   Lang.set('tr'); // default TR
-  applyI18N('tr'); // bind text
+  applyI18N('tr'); // initial bind
 });
 </script>
